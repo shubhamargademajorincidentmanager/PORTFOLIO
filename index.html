@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubham Argade | Major Incident Manager</title>
+<meta name="description" content="Shubham Argade - Major Incident Manager Portfolio | ITIL, Azure, Power BI, Problem Management">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   html {scroll-behavior: smooth;}
-  body {font-family:sans-serif; background:#f9fafb; color:#111827;}
+  body {font-family:sans-serif; background:#f9fafb; color:#111827; transition: background 0.5s, color 0.5s;}
   body.dark {background:#111827; color:#f9fafb;}
   section {padding:4rem 1rem; opacity:0; transform:translateY(50px);}
   nav a.active {color:#3b82f6; font-weight:bold;}
@@ -30,9 +32,17 @@
   .timeline::before {content:""; position:absolute; left:15px; top:0; bottom:0; width:4px; background:#3b82f6; border-radius:2px;}
   .timeline-item {position: relative; margin-bottom:2rem; padding-left:2.5rem;}
   .timeline-item::before {content:""; position:absolute; left:-0.5rem; width:1rem; height:1rem; border-radius:50%; background:#3b82f6; top:0;}
-  .skill-circle {position:relative; width:120px; height:120px; margin:auto;}
+  .skill-circle {position:relative; width:120px; height:120px; margin:auto; opacity:0; transform:scale(0.7); transition: all 0.8s ease-out;}
   .skill-circle canvas {position:absolute; top:0; left:0;}
-  .skill-circle span {position:absolute; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1rem;}
+  .skill-circle span {position:absolute; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1rem; text-align:center;}
+  /* Modal */
+  #projectModal {position: fixed; inset:0; background: rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; z-index:50; opacity:0; pointer-events:none; transition: all 0.3s ease;}
+  #projectModal.active {opacity:1; pointer-events:auto;}
+  #projectModal .modal-content {background:white; padding:2rem; border-radius:0.5rem; max-width:500px; position:relative;}
+  #projectModal .modal-close {position:absolute; top:0.5rem; right:0.5rem; cursor:pointer; font-size:1.5rem;}
+  /* Testimonial fade */
+  #testimonialSlider > div {position:absolute; top:0; left:0; width:100%; opacity:0; transition: opacity 0.5s;}
+  #testimonialSlider > div.active {opacity:1; position:relative;}
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans relative">
@@ -74,7 +84,7 @@
   <!-- Particle background -->
   <canvas id="particles" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
   <div class="relative z-10">
-    <h1 class="text-5xl font-bold mb-4">Shubham Argade</h1>
+    <h1 class="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-white animate-gradient">Shubham Argade</h1>
     <p class="text-xl mb-2"><span id="typing-text"></span><span class="typing-cursor"></span></p>
     <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
     <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white text-3xl">⬇</a>
@@ -99,23 +109,23 @@
       <div><p>Years Experience</p><p class="counter" data-target="3">0</p></div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-      <div class="skill-circle">
+      <div class="skill-circle" data-value="90" data-color="#6366f1">
         <canvas id="skill1" width="120" height="120"></canvas>
         <span>Major Incident<br>Management</span>
       </div>
-      <div class="skill-circle">
+      <div class="skill-circle" data-value="85" data-color="#f59e0b">
         <canvas id="skill2" width="120" height="120"></canvas>
         <span>ITIL/ITSM</span>
       </div>
-      <div class="skill-circle">
+      <div class="skill-circle" data-value="70" data-color="#10b981">
         <canvas id="skill3" width="120" height="120"></canvas>
         <span>Azure</span>
       </div>
-      <div class="skill-circle">
+      <div class="skill-circle" data-value="75" data-color="#3b82f6">
         <canvas id="skill4" width="120" height="120"></canvas>
         <span>Power BI</span>
       </div>
-      <div class="skill-circle">
+      <div class="skill-circle" data-value="80" data-color="#ec4899">
         <canvas id="skill5" width="120" height="120"></canvas>
         <span>Problem & RCA</span>
       </div>
@@ -123,7 +133,7 @@
   </div>
 </section>
 
-<!-- Experience Section with Timeline -->
+<!-- Experience Section -->
 <section id="experience" class="max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Professional Experience</h2>
   <div class="timeline">
@@ -179,24 +189,29 @@
   </div>
 </section>
 
+<!-- GitHub Stats -->
+<section id="github" class="max-w-4xl mx-auto py-16 text-center">
+  <h2 class="text-3xl font-bold mb-6 text-indigo-600">GitHub Stats</h2>
+  <img src="https://github-readme-stats.vercel.app/api?username=shubhamargademajorincidentmanager&show_icons=true&theme=radical" alt="GitHub Stats" class="mx-auto mb-4">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shubhamargademajorincidentmanager&layout=compact&theme=radical" alt="Top Languages" class="mx-auto">
+</section>
+
 <!-- Testimonials Section -->
-<section id="testimonials" class="bg-gray-100 dark:bg-gray-800 py-16">
+<section id="testimonials" class="bg-gray-100 dark:bg-gray-800 py-16 relative">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Testimonials</h2>
-  <div class="max-w-3xl mx-auto relative overflow-hidden">
-    <div id="testimonialSlider" class="flex transition-transform duration-500">
-      <div class="min-w-full p-5">
+  <div class="max-w-3xl mx-auto relative overflow-hidden h-32">
+    <div id="testimonialSlider">
+      <div class="active min-w-full p-5">
         <p>"Shubham handled critical incidents at Barclays with great leadership and speed." – Manager</p>
       </div>
       <div class="min-w-full p-5">
         <p>"Excellent Major Incident Manager, proactive and detail-oriented." – Team Lead</p>
       </div>
     </div>
-    <button id="prevTestimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">◀</button>
-    <button id="nextTestimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">▶</button>
   </div>
 </section>
 
-<!-- Contact Section with Form -->
+<!-- Contact Section -->
 <section id="contact" class="max-w-4xl mx-auto text-center py-16">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600">Contact Me</h2>
   <form action="https://formspree.io/f/yourformid" method="POST" class="max-w-xl mx-auto flex flex-col gap-4">
@@ -216,80 +231,158 @@
 <!-- Back to Top -->
 <button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">⬆ Top</button>
 
+<!-- Project Modal -->
+<div id="projectModal">
+  <div class="modal-content">
+    <span id="modalClose" class="modal-close">✖</span>
+    <h3 id="modalTitle" class="text-xl font-bold mb-2"></h3>
+    <p id="modalDesc" class="mb-4"></p>
+    <a id="modalLink" href="#" target="_blank" class="text-indigo-600 hover:underline">View on GitHub</a>
+  </div>
+</div>
+
 <!-- Scripts -->
 <script>
-// Typing animation
-const phrases=["Proactive Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
-const typingElem=document.getElementById("typing-text");
-let phraseIndex=0,charIndex=0,isDeleting=false;
-function typeLoop(){
-  const current=phrases[phraseIndex];
-  if(isDeleting){typingElem.textContent=current.substring(0,charIndex--); if(charIndex<0){isDeleting=false; phraseIndex=(phraseIndex+1)%phrases.length;}}
-  else{typingElem.textContent=current.substring(0,charIndex++); if(charIndex>current.length){isDeleting=true;}}
-  setTimeout(typeLoop,isDeleting?50:150);
-} typeLoop();
+// Dark Mode Toggle
+const darkToggle = document.getElementById('darkModeToggle');
+darkToggle.addEventListener('click',()=>document.body.classList.toggle('dark'));
 
-// Dark mode
-const darkToggle=document.getElementById("darkModeToggle");
-if(localStorage.getItem("theme")==="dark") document.body.classList.add("dark");
-darkToggle.addEventListener('click',()=>{document.body.classList.toggle("dark"); localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light");});
+// Mobile Menu Toggle
+const menuBtn = document.getElementById('menu-btn');
+const menu = document.getElementById('menu');
+menuBtn.addEventListener('click',()=>menu.classList.toggle('hidden'));
 
-// Mobile menu
-const menuBtn=document.getElementById("menu-btn");
-const menu=document.getElementById("menu");
-menuBtn.addEventListener('click',()=>menu.classList.toggle("hidden"));
+// Navbar Scroll Background & Active Link
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('#nav-links a, #menu a');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('solid', window.scrollY>50);
+  // Scrollspy
+  navLinks.forEach(link=>{
+    const sec = document.querySelector(link.getAttribute('href'));
+    if(sec.offsetTop-100<=window.scrollY && sec.offsetTop+sec.offsetHeight>window.scrollY){
+      link.classList.add('active');
+    }else link.classList.remove('active');
+  });
+});
 
-// Scroll progress
-const progressBar=document.getElementById("progressBar");
-window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop; const height=document.documentElement.scrollHeight-document.documentElement.clientHeight; progressBar.style.width=(winScroll/height*100)+"%";});
+// Scroll progress bar
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll',()=>progressBar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100)+'%');
 
-// Navbar background
-const navbar=document.getElementById("navbar");
-window.addEventListener('scroll',()=>{navbar.classList.toggle("solid",window.scrollY>50); navbar.classList.toggle("transparent",window.scrollY<=50);});
+// Back to Top
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll',()=>backBtn.classList.toggle('show', window.scrollY>300));
+backBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-// Back to top
-const backTop=document.getElementById("backToTop");
-window.addEventListener('scroll',()=>{if(window.scrollY>300) backTop.classList.add("show"); else backTop.classList.remove("show");});
-backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+// Typing Animation
+const texts = ["Major Incident Manager","ITIL Practitioner","Azure & Power BI Specialist"];
+let tIndex=0,charIndex=0;
+function typeText(){
+  if(charIndex<texts[tIndex].length){
+    document.getElementById('typing-text').textContent += texts[tIndex][charIndex];
+    charIndex++; setTimeout(typeText,100);
+  }else{ setTimeout(eraseText,2000);}
+}
+function eraseText(){
+  if(charIndex>0){
+    document.getElementById('typing-text').textContent = texts[tIndex].substring(0,charIndex-1);
+    charIndex--; setTimeout(eraseText,50);
+  }else{ tIndex=(tIndex+1)%texts.length; setTimeout(typeText,500);}
+}
+typeText();
 
-// Reveal Sections
-const sections=document.querySelectorAll('section');
-function revealSections(){sections.forEach(section=>{if(section.getBoundingClientRect().top<window.innerHeight-100){section.style.opacity=1; section.style.transform='translateY(0)'; section.style.transition='all 0.8s ease-out';}})}
-window.addEventListener('scroll',revealSections);
-window.addEventListener('load',revealSections);
+// Animate Sections
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity=1;entry.target.style.transform="translateY(0)";}});
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
 
-// Counters
-const counters=document.querySelectorAll('.counter');
-counters.forEach(counter=>{const updateCount=()=>{const target=+counter.getAttribute('data-target'); let count=+counter.innerText; let inc=Math.ceil(target/200); if(count<target){counter.innerText=count+inc; setTimeout(updateCount,20);}else{counter.innerText=target;}}; updateCount();});
+// Counter Animation
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter=>{
+  const update = ()=>{
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = target/100;
+    if(count<target){counter.innerText=Math.ceil(count+increment);setTimeout(update,20);}
+    else counter.innerText=target;
+  };
+  update();
+});
 
-// Navbar active links
-const navLinks=document.querySelectorAll('#nav-links a');
-window.addEventListener('scroll',()=>{let fromTop=window.scrollY+200; navLinks.forEach(link=>{const section=document.querySelector(link.hash); if(section.offsetTop<=fromTop && section.offsetTop+section.offsetHeight>fromTop){link.classList.add('active');} else{link.classList.remove('active');}});});
+// Skill Circles Animation
+const skillCircles = document.querySelectorAll('.skill-circle');
+skillCircles.forEach((el,i)=>{
+  const canvas = el.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const value = el.getAttribute('data-value');
+  const color = el.getAttribute('data-color');
+  let progress = 0;
+  function animateCircle(){
+    const rect = el.getBoundingClientRect();
+    if(rect.top<window.innerHeight-50 && progress===0){
+      const animate = ()=>{
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.beginPath();
+        ctx.arc(60,60,50, -Math.PI/2, -Math.PI/2 + progress/100*2*Math.PI);
+        ctx.strokeStyle=color; ctx.lineWidth=10; ctx.stroke();
+        progress++; if(progress<=value) requestAnimationFrame(animate);
+        el.style.opacity=1; el.style.transform="scale(1)";
+      };
+      animate();
+    }
+  }
+  window.addEventListener('scroll',animateCircle); animateCircle();
+});
 
-// Skill circles
-function createSkillCircle(id,value,color){const ctx=document.getElementById(id).getContext('2d');new Chart(ctx,{type:'doughnut',data:{datasets:[{data:[value,100-value],backgroundColor:[color,'#e5e7eb'],borderWidth:0}]},options:{cutout:'75%',plugins:{legend:{display:false},tooltip:{enabled:false}},responsive:false,animation:{animateRotate:true,animateScale:true}}});}
-createSkillCircle('skill1',90,'#6366f1'); createSkillCircle('skill2',85,'#f59e0b'); createSkillCircle('skill3',70,'#10b981'); createSkillCircle('skill4',75,'#3b82f6'); createSkillCircle('skill5',80,'#ec4899');
+// Project Modal
+const projectCards = document.querySelectorAll('.project-card');
+const modal = document.getElementById('projectModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalLink = document.getElementById('modalLink');
+const modalClose = document.getElementById('modalClose');
+projectCards.forEach(card=>{
+  card.addEventListener('click', e=>{
+    e.preventDefault();
+    modal.classList.add('active');
+    modalTitle.textContent = card.querySelector('h3').textContent;
+    modalDesc.textContent = card.querySelector('p').textContent;
+    modalLink.href = card.href;
+  });
+});
+modalClose.addEventListener('click',()=>modal.classList.remove('active'));
 
-// Testimonial slider
-const slider=document.getElementById("testimonialSlider");
-const totalSlides=slider.children.length; let index=0;
-document.getElementById("nextTestimonial").addEventListener('click',()=>{index=(index+1)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;});
-document.getElementById("prevTestimonial").addEventListener('click',()=>{index=(index-1+totalSlides)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;});
-setInterval(()=>{index=(index+1)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;},5000);
+// Testimonials Slider
+const testimonials = document.querySelectorAll('#testimonialSlider > div');
+let tIndex2 = 0;
+function showTestimonial(){
+  testimonials.forEach((t,i)=>t.classList.remove('active'));
+  testimonials[tIndex2].classList.add('active');
+  tIndex2=(tIndex2+1)%testimonials.length;
+  setTimeout(showTestimonial,4000);
+}
+showTestimonial();
 
-// Project Filter
-const projectBtns=document.querySelectorAll(".project-filter button");
-const projects=document.querySelectorAll(".project-card");
-projectBtns.forEach(btn=>{btn.addEventListener('click',()=>{projectBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const filter=btn.getAttribute('data-filter'); projects.forEach(p=>{p.style.display=(filter==='all'||p.getAttribute('data-tech')===filter)?'block':'none';});});});
-
-// Simple particles background
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth; canvas.height=window.innerHeight;
-let particles=[]; for(let i=0;i<80;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,d:Math.random()*1});}
-function drawParticles(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.5)';ctx.fill();p.y-=p.d; if(p.y<0) p.y=canvas.height;}); requestAnimationFrame(drawParticles);}
+// Particle Background
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const particles=[]; for(let i=0;i<80;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)/1,dy:(Math.random()-0.5)/1})}
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.fill();
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width) p.dx*=-1;
+    if(p.y<0||p.y>canvas.height) p.dy*=-1;
+  });
+  requestAnimationFrame(drawParticles);
+}
 drawParticles();
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 </script>
 
 </body>
