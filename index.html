@@ -4,34 +4,29 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shubham Argade | Major Incident Manager</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-html {scroll-behavior: smooth; transition: background 0.3s, color 0.3s;}
-body {font-family:sans-serif; background:#f9fafb; color:#111827;}
-body.dark {background:#111827; color:#f9fafb;}
-section {padding:4rem 1rem;}
-nav a.active {color:#3b82f6; font-weight:bold;}
-.fade-in {opacity:0; transform:translateY(30px); transition: all 0.8s ease-out;}
-.fade-in.show {opacity:1; transform:translateY(0);}
-#progressBar {position: fixed; top:0; left:0; height:5px; width:0%; background: linear-gradient(to right,#4f46e5,#3b82f6); z-index:60; transition: width 0.25s ease-out;}
-#backToTop {position:fixed; bottom:20px; right:20px; display:none; z-index:50; opacity:0; transform:translateY(20px); transition: all 0.3s ease-in-out;}
-#backToTop.show {display:block; opacity:1; transform:translateY(0);}
-nav {transition:background 0.4s,padding 0.4s;}
-nav.transparent {background:transparent; padding:1.5rem 1rem;}
-nav.solid {background: rgba(17,24,39,0.95); padding:1rem 1rem; box-shadow:0 2px 6px rgba(0,0,0,0.2);}
-.typing-cursor {display:inline-block;width:2px;background:#000;margin-left:4px; animation:blink 0.7s infinite;}
-body.dark .typing-cursor {background:#3b82f6;}
-@keyframes blink {50%{background:transparent;}}
-#heroParticles {position:absolute; width:100%; height:100%; top:0; left:0; z-index:0;}
-.counter {font-size:2rem; font-weight:bold;}
-.project-filter button {margin-right:0.5rem; margin-bottom:0.5rem; padding:0.3rem 0.6rem; border-radius:0.3rem; border:1px solid #ccc; cursor:pointer;}
-.project-filter button.active {background:#3b82f6; color:white; border:none;}
-
-/* Tooltip styling */
-.tooltip {position: relative; cursor: pointer;}
-.tooltip::after {content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #111827; color: #f9fafb; padding: 0.3rem 0.5rem; font-size: 0.75rem; border-radius: 0.25rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s;}
-.tooltip:hover::after {opacity: 1;}
+  html {scroll-behavior: smooth;}
+  body {font-family:sans-serif; background:#f9fafb; color:#111827;}
+  body.dark {background:#111827; color:#f9fafb;}
+  section {padding:4rem 1rem;}
+  nav a.active {color:#3b82f6; font-weight:bold;}
+  #progressBar {position: fixed; top:0; left:0; height:5px; width:0%; background: linear-gradient(to right,#4f46e5,#3b82f6); z-index:60; transition: width 0.25s ease-out;}
+  #backToTop {position:fixed; bottom:20px; right:20px; display:none; z-index:50; opacity:0; transform:translateY(20px); transition: all 0.3s ease-in-out;}
+  #backToTop.show {display:block; opacity:1; transform:translateY(0);}
+  nav {transition:background 0.4s,padding 0.4s;}
+  nav.transparent {background:transparent; padding:1.5rem 1rem;}
+  nav.solid {background: rgba(17,24,39,0.95); padding:1rem 1rem; box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+  .typing-cursor {display:inline-block;width:2px;background:#000;margin-left:4px; animation:blink 0.7s infinite;}
+  body.dark .typing-cursor {background:#3b82f6;}
+  @keyframes blink {50%{background:transparent;}}
+  .counter {font-size:2rem; font-weight:bold;}
+  .project-filter button {margin-right:0.5rem; margin-bottom:0.5rem; padding:0.3rem 0.6rem; border-radius:0.3rem; border:1px solid #ccc; cursor:pointer;}
+  .project-filter button.active {background:#3b82f6; color:white; border:none;}
+  .skill-bar {margin-bottom:1rem;}
+  .tooltip {position: relative; cursor: pointer;}
+  .tooltip::after {content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #111827; color: #f9fafb; padding: 0.3rem 0.5rem; font-size: 0.75rem; border-radius: 0.25rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s;}
+  .tooltip:hover::after {opacity: 1;}
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans relative">
@@ -69,87 +64,45 @@ body.dark .typing-cursor {background:#3b82f6;}
 </div>
 
 <!-- Hero Section -->
-<section id="hero" class="relative bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-32 text-center overflow-hidden">
-  <canvas id="heroParticles"></canvas>
+<section id="hero" class="relative bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-32 text-center">
   <div class="relative z-10">
     <h1 class="text-5xl font-bold mb-4">Shubham Argade</h1>
     <p class="text-xl mb-2"><span id="typing-text"></span><span class="typing-cursor"></span></p>
     <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
     <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white text-3xl">⬇</a>
-    <a href="Shubham_Argade_Resume.pdf" download class="mt-6 inline-block bg-white text-indigo-600 px-6 py-2 rounded font-semibold hover:bg-gray-200">Download Resume</a>
+    <a href="./Shubham_Argade_Resume.pdf" download class="mt-6 inline-block bg-white text-indigo-600 px-6 py-2 rounded font-semibold hover:bg-gray-200">Download Resume</a>
   </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="fade-in max-w-4xl mx-auto">
+<section id="about" class="max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">About Me</h2>
   <p class="leading-relaxed text-lg text-center">Major Incident Manager with 3.5+ years of experience in handling high-severity incidents, ITIL processes, RCA, and stakeholder communication. Skilled in team coordination and leadership to minimize business impact and ensure service reliability.</p>
 </section>
 
 <!-- Skills Section -->
-<section id="skills" class="bg-gray-100 dark:bg-gray-800 fade-in">
+<section id="skills" class="bg-gray-100 dark:bg-gray-800">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-indigo-600">Skills & Stats</h2>
-    <!-- Counters -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
       <div><p>Incidents Managed</p><p class="counter" data-target="350">0</p></div>
       <div><p>Projects</p><p class="counter" data-target="12">0</p></div>
       <div><p>Clients</p><p class="counter" data-target="3">0</p></div>
       <div><p>Years Experience</p><p class="counter" data-target="3">0</p></div>
     </div>
-    <!-- Skills -->
+
     <div class="text-left space-y-6">
-      <div class="skill-bar flex items-center space-x-4" data-progress="90" data-tooltip="90%">
-        <span class="text-indigo-600 text-2xl tooltip">🚨</span>
-        <div class="flex-1">
-          <p class="font-semibold">Major Incident Management</p>
-          <div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full">
-            <div class="bg-indigo-600 h-4 rounded-full w-0"></div>
-          </div>
-        </div>
-      </div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%">
-        <span class="text-indigo-600 text-2xl tooltip">🛠️</span>
-        <div class="flex-1">
-          <p class="font-semibold">ITIL/ITSM</p>
-          <div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full">
-            <div class="bg-indigo-600 h-4 rounded-full w-0"></div>
-          </div>
-        </div>
-      </div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="80" data-tooltip="80%">
-        <span class="text-indigo-600 text-2xl tooltip">☁️</span>
-        <div class="flex-1">
-          <p class="font-semibold">Azure</p>
-          <div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full">
-            <div class="bg-indigo-600 h-4 rounded-full w-0"></div>
-          </div>
-        </div>
-      </div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="75" data-tooltip="75%">
-        <span class="text-indigo-600 text-2xl tooltip">📊</span>
-        <div class="flex-1">
-          <p class="font-semibold">Power BI</p>
-          <div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full">
-            <div class="bg-indigo-600 h-4 rounded-full w-0"></div>
-          </div>
-        </div>
-      </div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%">
-        <span class="text-indigo-600 text-2xl tooltip">🔍</span>
-        <div class="flex-1">
-          <p class="font-semibold">Problem & RCA Analysis</p>
-          <div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full">
-            <div class="bg-indigo-600 h-4 rounded-full w-0"></div>
-          </div>
-        </div>
-      </div>
+      <div class="skill-bar flex items-center space-x-4" data-progress="90" data-tooltip="90%"><span class="text-indigo-600 text-2xl tooltip">🚨</span><div class="flex-1"><p class="font-semibold">Major Incident Management</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
+      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%"><span class="text-indigo-600 text-2xl tooltip">🛠️</span><div class="flex-1"><p class="font-semibold">ITIL/ITSM</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
+      <div class="skill-bar flex items-center space-x-4" data-progress="80" data-tooltip="80%"><span class="text-indigo-600 text-2xl tooltip">☁️</span><div class="flex-1"><p class="font-semibold">Azure</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
+      <div class="skill-bar flex items-center space-x-4" data-progress="75" data-tooltip="75%"><span class="text-indigo-600 text-2xl tooltip">📊</span><div class="flex-1"><p class="font-semibold">Power BI</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
+      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%"><span class="text-indigo-600 text-2xl tooltip">🔍</span><div class="flex-1"><p class="font-semibold">Problem & RCA Analysis</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- Experience Section -->
-<section id="experience" class="fade-in max-w-4xl mx-auto">
+<section id="experience" class="max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Professional Experience</h2>
   <div class="relative border-l-2 border-indigo-600 ml-6">
     <div class="mb-10 ml-4 relative">
@@ -174,7 +127,7 @@ body.dark .typing-cursor {background:#3b82f6;}
 </section>
 
 <!-- Education Section -->
-<section id="education" class="bg-gray-100 dark:bg-gray-800 fade-in">
+<section id="education" class="bg-gray-100 dark:bg-gray-800">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-indigo-600">Education & Certifications</h2>
     <ul class="list-disc ml-5 space-y-2 text-lg">
@@ -187,7 +140,7 @@ body.dark .typing-cursor {background:#3b82f6;}
 </section>
 
 <!-- Projects Section -->
-<section id="projects" class="fade-in max-w-4xl mx-auto">
+<section id="projects" class="max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Projects</h2>
   <div class="text-center mb-4 project-filter">
     <button data-filter="all" class="active">All</button>
@@ -207,7 +160,7 @@ body.dark .typing-cursor {background:#3b82f6;}
 </section>
 
 <!-- Testimonials Section -->
-<section id="testimonials" class="bg-gray-100 dark:bg-gray-800 fade-in">
+<section id="testimonials" class="bg-gray-100 dark:bg-gray-800">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Testimonials</h2>
   <div class="max-w-3xl mx-auto relative overflow-hidden">
     <div id="testimonialSlider" class="flex transition-transform duration-500">
@@ -220,18 +173,18 @@ body.dark .typing-cursor {background:#3b82f6;}
 </section>
 
 <!-- GitHub Stats & Activity -->
-<section id="github-stats" class="fade-in max-w-4xl mx-auto text-center">
+<section id="github-stats" class="max-w-4xl mx-auto text-center">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600">GitHub Stats</h2>
   <img src="https://github-readme-stats.vercel.app/api?username=shubhamargademajorincidentmanager&show_icons=true&theme=radical" alt="GitHub Stats" class="mx-auto rounded shadow-lg">
 </section>
 
-<section id="github-graph" class="fade-in max-w-4xl mx-auto text-center">
+<section id="github-graph" class="max-w-4xl mx-auto text-center">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600">GitHub Activity</h2>
   <img src="https://ghchart.rshah.org/shubhamargademajorincidentmanager" alt="GitHub Chart" class="mx-auto">
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="fade-in max-w-4xl mx-auto text-center">
+<section id="contact" class="max-w-4xl mx-auto text-center">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600">Contact Me</h2>
   <p class="text-lg">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a></p>
   <p class="text-lg">📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
@@ -239,7 +192,7 @@ body.dark .typing-cursor {background:#3b82f6;}
 </section>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white text-center py-4 fade-in">
+<footer class="bg-gray-900 text-white text-center py-4">
   <p>&copy; 2025 Shubham Argade. Built with ❤️ using TailwindCSS.</p>
 </footer>
 
@@ -247,92 +200,95 @@ body.dark .typing-cursor {background:#3b82f6;}
 <button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">⬆ Top</button>
 
 <!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-// AOS init
-AOS.init({duration:800, easing:'ease-in-out', once:true});
-
-// Typing effect
-const phrases=["Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
-let i=0,j=0,txt="";
-const typingElem=document.getElementById("typing-text");
-(function type(){
-  if(i<phrases.length){
-    txt=phrases[i].substring(0,j+1);
+  // Typing Effect
+  const phrases=["Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
+  let i=0,j=0;
+  const typingElem=document.getElementById("typing-text");
+  (function type(){
+    let txt=phrases[i].substring(0,j+1);
     typingElem.textContent=txt;
     j++;
-    if(j===phrases[i].length){i++;j=0;setTimeout(type,1500);} else setTimeout(type,100);
-  } else {i=0;j=0;setTimeout(type,500);}
-})();
+    if(j===phrases[i].length){i++; j=0; setTimeout(type,1500);}
+    else setTimeout(type,100);
+    if(i===phrases.length)i=0;
+  })();
 
-// Dark Mode Toggle
-const darkBtn=document.getElementById("darkModeToggle");
-darkBtn.addEventListener("click",()=>{document.body.classList.toggle("dark");});
+  // Dark Mode Toggle
+  document.getElementById("darkModeToggle").addEventListener("click",()=>{document.body.classList.toggle("dark");});
 
-// Mobile Menu
-const menuBtn=document.getElementById("menu-btn");
-const menu=document.getElementById("menu");
-menuBtn.addEventListener("click",()=>{menu.classList.toggle("hidden");});
+  // Mobile Menu
+  const menuBtn=document.getElementById("menu-btn");
+  const menu=document.getElementById("menu");
+  menuBtn.addEventListener("click",()=>{menu.classList.toggle("hidden");});
 
-// Scroll progress bar
-const progressBar=document.getElementById("progressBar");
-window.addEventListener("scroll",()=>{let winScroll=document.body.scrollTop||document.documentElement.scrollTop;let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;let scrolled=(winScroll/height)*100;progressBar.style.width=scrolled+"%";});
+  // Scroll progress bar
+  const progressBar=document.getElementById("progressBar");
+  window.addEventListener("scroll",()=>{
+    let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+    let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    let scrolled=(winScroll/height)*100;
+    progressBar.style.width=scrolled+"%";
+  });
 
-// Navbar color on scroll
-const navbar=document.getElementById("navbar");
-window.addEventListener("scroll",()=>{if(window.scrollY>50){navbar.classList.add("solid");navbar.classList.remove("transparent");} else {navbar.classList.remove("solid");navbar.classList.add("transparent");}});
+  // Navbar color
+  const navbar=document.getElementById("navbar");
+  window.addEventListener("scroll",()=>{if(window.scrollY>50){navbar.classList.add("solid"); navbar.classList.remove("transparent");}else{navbar.classList.remove("solid"); navbar.classList.add("transparent");}});
 
-// Back to Top
-const backBtn=document.getElementById("backToTop");
-window.addEventListener("scroll",()=>{if(window.scrollY>400){backBtn.classList.add("show");} else {backBtn.classList.remove("show");}});
-backBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
+  // Back to Top
+  const backBtn=document.getElementById("backToTop");
+  window.addEventListener("scroll",()=>{if(window.scrollY>400){backBtn.classList.add("show");} else {backBtn.classList.remove("show");}});
+  backBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
 
-// Fade-in animations
-const faders=document.querySelectorAll(".fade-in");
-const appearOptions={threshold:0.3};
-const appearOnScroll=new IntersectionObserver((entries,observer)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");observer.unobserve(entry.target);}}},appearOptions);
-faders.forEach(fader=>{appearOnScroll.observe(fader);});
+  // Counters
+  const counters=document.querySelectorAll('.counter');
+  counters.forEach(counter=>{
+    const updateCount=()=>{
+      const target=+counter.getAttribute('data-target');
+      const count=+counter.innerText;
+      const inc=Math.ceil(target/200);
+      if(count<target){counter.innerText=count+inc; setTimeout(updateCount,10);} else {counter.innerText=target;}
+    };
+    updateCount();
+  });
 
-// Counters
-const counters=document.querySelectorAll('.counter');
-counters.forEach(counter=>{
-  const updateCount=()=>{
-    const target=+counter.getAttribute('data-target');
-    const count=+counter.innerText;
-    const inc=Math.ceil(target/200);
-    if(count<target){counter.innerText=count+inc;setTimeout(updateCount,10);} else {counter.innerText=target;}
-  };
-  updateCount();
-});
-
-// Skills Animation
-const skillBars=document.querySelectorAll('.skill-bar');
-function animateSkills(){
-  skillBars.forEach(bar=>{
-    const barTop=bar.getBoundingClientRect().top;
-    const windowHeight=window.innerHeight;
-    if(barTop<windowHeight-50 && !bar.classList.contains('animated')){
+  // Skill Bars Animation
+  const skillBars=document.querySelectorAll('.skill-bar');
+  function animateSkills(){
+    skillBars.forEach(bar=>{
       const progress=bar.getAttribute('data-progress');
       bar.querySelector('div div').style.width=progress+'%';
-      const icon=bar.querySelector('span');
-      icon.classList.add('animate-bounce');
-      setTimeout(()=>icon.classList.remove('animate-bounce'),1000);
-      bar.classList.add('animated');
-    }
-  });
-}
-window.addEventListener('scroll',animateSkills);
-window.addEventListener('load',animateSkills);
-document.querySelectorAll('.tooltip').forEach(tip=>{
-  tip.setAttribute('data-tooltip',tip.parentElement.parentElement.getAttribute('data-tooltip'));
-});
+    });
+  }
+  window.addEventListener('load',animateSkills);
 
-// Testimonial Slider
-const slider=document.getElementById('testimonialSlider');
-const slides=slider.children.length;
-let current=0;
-document.getElementById('nextTestimonial').addEventListener('click',()=>{current=(current+1)%slides;slider.style.transform=`translateX(-${current*100}%)`;});
-document.getElementById('prevTestimonial').addEventListener('click',()=>{current=(current-1+slides)%slides;slider.style.transform=`translateX(-${current*100}%)`;});
+  // Testimonials Slider
+  const slider=document.getElementById('testimonialSlider');
+  let currentSlide=0;
+  const slides=slider.children.length;
+  document.getElementById('nextTestimonial').addEventListener('click',()=>{
+    currentSlide=(currentSlide+1)%slides;
+    slider.style.transform=`translateX(-${currentSlide*100}%)`;
+  });
+  document.getElementById('prevTestimonial').addEventListener('click',()=>{
+    currentSlide=(currentSlide-1+slides)%slides;
+    slider.style.transform=`translateX(-${currentSlide*100}%)`;
+  });
+
+  // Projects Filter
+  const projectBtns=document.querySelectorAll('.project-filter button');
+  const projectCards=document.querySelectorAll('.project-card');
+  projectBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      projectBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter=btn.getAttribute('data-filter');
+      projectCards.forEach(card=>{
+        if(filter==='all'||card.getAttribute('data-tech')===filter) card.style.display='block';
+        else card.style.display='none';
+      });
+    });
+  });
 </script>
 </body>
 </html>
