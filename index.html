@@ -3,52 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shubham Argade | Portfolio</title>
+  <title>Shubham Argade | Major Incident Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    /* Smooth transitions for navbar */
-    nav {
-      transition: background-color 0.5s ease, padding 0.4s ease, box-shadow 0.5s ease;
-    }
-    nav.transparent {
-      background: transparent;
-      padding: 1.5rem 1rem;
-      box-shadow: none;
-    }
-    nav.solid {
-      background: rgba(17, 24, 39, 0.95);
-      padding: 1rem 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Nav Links (Hover + Active Underline Center-Out) */
-    nav a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -4px;
-      width: 0%;
-      height: 2px;
-      background: #3b82f6;
-      transition: width 0.3s ease, left 0.3s ease;
-      transform: translateX(-50%);
-    }
-    nav a:hover::after {
-      width: 100%;
-      left: 50%;
-    }
-    nav a.active {
-      color: #3b82f6;
-      font-weight: bold;
-    }
-    nav a.active::after {
-      width: 100%;
-      left: 50%;
+    html {
+      scroll-behavior: smooth;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* Scroll Progress Bar */
@@ -60,24 +20,10 @@
       background: linear-gradient(to right, #4f46e5, #3b82f6);
       width: 0%;
       z-index: 60;
-      opacity: 0;
-      transition: width 0.25s ease-out, opacity 0.4s ease;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.6), 0 0 20px rgba(79, 70, 229, 0.5);
-      animation: glowPulse 2s infinite alternate;
-    }
-    #progressBar.show {
-      opacity: 1;
-    }
-    @keyframes glowPulse {
-      from {
-        box-shadow: 0 0 6px rgba(59, 130, 246, 0.3), 0 0 12px rgba(79, 70, 229, 0.2);
-      }
-      to {
-        box-shadow: 0 0 14px rgba(59, 130, 246, 0.6), 0 0 28px rgba(79, 70, 229, 0.4);
-      }
+      transition: width 0.25s ease-out;
     }
 
-    /* Back to Top Button */
+    /* Back to Top Animation */
     #backToTop {
       position: fixed;
       bottom: 20px;
@@ -87,182 +33,297 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.3s ease-in-out;
-      animation: pulseGlow 2s infinite alternate;
     }
     #backToTop.show {
       display: block;
       opacity: 1;
       transform: translateY(0);
-      animation: bounce 0.6s ease, pulseGlow 2s infinite alternate;
-    }
-    #backToTop:hover {
-      background: #4f46e5;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.7),
-                  0 0 25px rgba(79, 70, 229, 0.6),
-                  0 0 40px rgba(59, 130, 246, 0.5);
-      transition: box-shadow 0.3s ease, background 0.3s ease;
-      animation: wiggle 0.6s ease-in-out;
+      animation: bounce 0.6s ease;
     }
     @keyframes bounce {
       0% { transform: translateY(20px); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    @keyframes pulseGlow {
-      from {
-        box-shadow: 0 0 6px rgba(59, 130, 246, 0.3), 0 0 12px rgba(79, 70, 229, 0.2);
-      }
-      to {
-        box-shadow: 0 0 14px rgba(59, 130, 246, 0.6), 0 0 28px rgba(79, 70, 229, 0.4);
-      }
+
+    /* Dark Mode */
+    body.dark {
+      background-color: #111827;
+      color: #f9fafb;
     }
-    @keyframes wiggle {
-      0%   { transform: translateY(0) rotate(0deg); }
-      25%  { transform: translateY(-2px) rotate(-5deg); }
-      50%  { transform: translateY(2px) rotate(5deg); }
-      75%  { transform: translateY(-2px) rotate(-3deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+    body.dark section {
+      background-color: #1f2937;
+      color: #f9fafb;
+    }
+    body.dark footer {
+      background-color: #000;
     }
 
-    /* Screen Shake */
-    @keyframes screenShake {
-      0%   { transform: translateX(0); }
-      20%  { transform: translateX(-5px); }
-      40%  { transform: translateX(5px); }
-      60%  { transform: translateX(-4px); }
-      80%  { transform: translateX(4px); }
-      100% { transform: translateX(0); }
+    /* Navbar Transparent to Solid */
+    nav {
+      transition: background-color 0.4s, padding 0.4s;
     }
-    .shake {
-      animation: screenShake 0.4s ease;
+    nav.transparent {
+      background: transparent;
+      padding: 1.5rem 1rem;
+    }
+    nav.solid {
+      background: rgba(17, 24, 39, 0.95);
+      padding: 1rem 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
-    /* Fade-in elements */
+    /* Typing Cursor */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      background: #000;
+      margin-left: 4px;
+      animation: blink 0.7s infinite;
+    }
+    body.dark .typing-cursor {
+      background: #3b82f6;
+    }
+    @keyframes blink {
+      50% { background: transparent; }
+    }
+
+    /* Fade-in Animation */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-in-out;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
     }
     .fade-in.show {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Celebration Popup */
-    #celebrationPopup {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-    #celebrationPopup.show {
-      opacity: 1;
-      animation: popupBounce 0.8s ease;
-    }
-    @keyframes popupBounce {
-      0% { transform: translate(-50%, 50px) scale(0.8); }
-      50% { transform: translate(-50%, -10px) scale(1.05); }
-      100% { transform: translate(-50%, 0) scale(1); }
+    /* Active Nav Link */
+    nav a.active {
+      color: #3b82f6;
+      font-weight: bold;
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-  <!-- Scroll Progress Bar -->
+  <!-- Progress Bar -->
   <div id="progressBar"></div>
 
   <!-- Navbar -->
-  <nav class="fixed top-0 w-full z-50 transparent">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Shubham Argade</h1>
-      <div class="space-x-6">
+  <nav class="fixed w-full top-0 z-40 flex justify-between items-center px-4 py-3 transparent text-white">
+    <h1 class="text-lg font-bold">Shubham Argade</h1>
+
+    <div class="flex items-center space-x-4">
+      <!-- Desktop Menu -->
+      <div id="nav-links" class="hidden md:flex space-x-6">
         <a href="#about">About</a>
+        <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </div>
+
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-700">
+        🌙
+      </button>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-btn" class="md:hidden focus:outline-none text-xl">
+        ☰
+      </button>
     </div>
   </nav>
 
-  <!-- Sections -->
-  <section id="about" class="min-h-screen flex items-center justify-center fade-in">
-    <h2 class="text-4xl font-bold">About Me</h2>
-  </section>
-  <section id="experience" class="min-h-screen flex items-center justify-center fade-in bg-gray-800">
-    <h2 class="text-4xl font-bold">Experience</h2>
-  </section>
-  <section id="projects" class="min-h-screen flex items-center justify-center fade-in">
-    <h2 class="text-4xl font-bold">Projects</h2>
-  </section>
-  <section id="contact" class="min-h-screen flex items-center justify-center fade-in bg-gray-800">
-    <h2 class="text-4xl font-bold">Contact</h2>
-  </section>
-
-  <!-- Back to Top -->
-  <button id="backToTop" class="bg-indigo-500 text-white p-3 rounded-full shadow-lg">
-    ⬆
-  </button>
-
-  <!-- Celebration Popup -->
-  <div id="celebrationPopup" class="fixed bottom-16 left-1/2 transform -translate-x-1/2 
-  bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-semibold 
-  z-50">
-    🎊 You reached the end! 🎉
+  <!-- Mobile Menu -->
+  <div id="menu" class="hidden md:hidden bg-gray-800 text-white flex-col space-y-2 px-4 py-3">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
   </div>
 
-  <!-- Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-28 mt-12 fade-in">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl font-bold mb-4">Shubham Argade</h1>
+      <p class="text-xl mb-2">
+        <span id="typing-text"></span>
+        <span class="typing-cursor"></span>
+      </p>
+      <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
+    </div>
+  </section>
 
+  <!-- About -->
+  <section id="about" class="py-16 px-6 max-w-4xl mx-auto fade-in">
+    <h2 class="text-2xl font-bold mb-6 text-indigo-600">About Me</h2>
+    <p class="leading-relaxed text-lg">
+      Major Incident Manager with 3.5+ years of experience in handling high-severity incidents, ITIL processes, RCA, and stakeholder communication. Skilled in team coordination and leadership to minimize business impact and ensure service reliability.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6 text-indigo-600">Skills</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Major Incident Management</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Incident Management</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Crisis Management</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Root Cause Analysis</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SLA Management</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Change & Problem Management</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Post-Incident Review</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Azure Cloud</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">ServiceNow</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SolarWinds</span>
+        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Power BI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="py-16 px-6 max-w-4xl mx-auto fade-in">
+    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Professional Experience</h2>
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold">HCL Technologies – Senior Analyst / Major Incident Manager</h3>
+      <p class="text-sm text-gray-500">Client: Barclays | May 2024 – Present</p>
+      <ul class="list-disc ml-5 mt-3 space-y-2">
+        <li>Orchestrated resolution of P1/P2 Azure cloud banking incidents, minimizing customer impact.</li>
+        <li>Facilitated bridge calls with Azure, infra, and vendor teams to restore services faster.</li>
+        <li>Created RCA & PIR reports, reducing repeat issues by 30%.</li>
+        <li>Built Power BI dashboards for SLA breaches & trends.</li>
+      </ul>
+    </div>
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold">Tech Mahindra – Software Engineer / Major Incident Manager</h3>
+      <p class="text-sm text-gray-500">Client: Morgan Stanley | Aug 2021 – Sep 2023</p>
+      <ul class="list-disc ml-5 mt-3 space-y-2">
+        <li>Directed P1/P2 incidents impacting trading platforms & market data services.</li>
+        <li>Coordinated Desktop, IT & Monitoring teams during critical outages.</li>
+        <li>Partnered with Problem Management to implement fixes reducing issues by 30%.</li>
+        <li>Ensured SLA compliance via ServiceNow tracking.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6 text-indigo-600">Education & Certifications</h2>
+      <ul class="list-disc ml-5 space-y-2 text-lg">
+        <li>BE Computer Engineering – Sinhgad Institute (SPPU), Pune | CGPA: 8.0</li>
+        <li>Microsoft Azure Fundamentals (AZ-900)</li>
+        <li>Microsoft Power BI Data Analyst (PL-300)</li>
+        <li>ITIL Foundation V4 Certified</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 px-6 max-w-4xl mx-auto text-center fade-in">
+    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Contact Me</h2>
+    <p class="text-lg">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a></p>
+    <p class="text-lg">📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
+    <p class="text-lg mt-4">🌐 <a href="https://github.com/shubhamargademajorincidentmanager" target="_blank" class="text-blue-600">GitHub</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600">LinkedIn</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4 fade-in">
+    <p>&copy; 2025 Shubham Argade. Built with ❤️ using TailwindCSS.</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">
+    ⬆ Top
+  </button>
+
+  <!-- Scripts -->
   <script>
+    const nav = document.querySelector("nav");
+    const navLinks = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll("section");
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
     const backToTop = document.getElementById('backToTop');
     const progressBar = document.getElementById('progressBar');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const typingText = document.getElementById('typing-text');
     const fadeEls = document.querySelectorAll('.fade-in');
-    const popup = document.getElementById("celebrationPopup");
 
-    // Load sounds
-    const whooshSound = new Audio("assets/whoosh.mp3");
-    const pingSound = new Audio("assets/ping.mp3");
+    // Typing animation
+    const roles = ["Major Incident Manager", "ITIL V4 Certified", "Problem Solver", "Cloud Enthusiast"];
+    let roleIndex = 0, charIndex = 0, deleting = false;
+    function typeEffect() {
+      let currentRole = roles[roleIndex];
+      if (!deleting) {
+        typingText.textContent = currentRole.substring(0, charIndex++);
+        if (charIndex > currentRole.length) {
+          deleting = true;
+          setTimeout(typeEffect, 1500);
+          return;
+        }
+      } else {
+        typingText.textContent = currentRole.substring(0, charIndex--);
+        if (charIndex < 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+        }
+      }
+      setTimeout(typeEffect, deleting ? 100 : 150);
+    }
+    typeEffect();
 
-    let pingPlayed = false;
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        nav.classList.remove("transparent");
+        nav.classList.add("solid");
+      } else {
+        nav.classList.remove("solid");
+        nav.classList.add("transparent");
+      }
+    });
 
-    // Scroll events
+    // Scroll spy (active section)
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+
+    // Mobile menu
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Scroll progress + back to top + fade-in
     window.addEventListener('scroll', () => {
+      // Back to top
       if (window.scrollY > 300) backToTop.classList.add("show");
       else backToTop.classList.remove("show");
 
+      // Progress bar
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = scrolled + "%";
 
-      if (window.scrollY > 50) {
-        progressBar.classList.add("show");
-        progressBar.style.width = scrolled + "%";
-
-        // Ping + Shake + Confetti + Popup
-        if (scrolled >= 100 && !pingPlayed) {
-          pingSound.currentTime = 0;
-          pingSound.play();
-
-          document.body.classList.add("shake");
-          setTimeout(() => document.body.classList.remove("shake"), 400);
-
-          confetti({
-            particleCount: 120,
-            spread: 80,
-            origin: { y: 1 },
-            colors: ['#4f46e5', '#3b82f6', '#22c55e', '#facc15', '#ef4444']
-          });
-
-          popup.classList.add("show");
-          setTimeout(() => popup.classList.remove("show"), 3000);
-
-          pingPlayed = true;
-        }
-      } else {
-        progressBar.classList.remove("show");
-        progressBar.style.width = "0%";
-        pingPlayed = false;
-      }
-
+      // Fade-in
       fadeEls.forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
@@ -271,12 +332,19 @@
       });
     });
 
-    // Back to Top
+    // Back to top
     backToTop.addEventListener('click', () => {
-      whooshSound.currentTime = 0;
-      whooshSound.play();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // Dark mode
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle("dark");
+      darkModeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+
+    // Trigger fade-in on load
+    window.dispatchEvent(new Event('scroll'));
   </script>
 </body>
 </html>
