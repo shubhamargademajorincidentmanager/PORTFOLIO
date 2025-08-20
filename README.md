@@ -16,7 +16,7 @@ This repo hosts my **GitHub Pages Portfolio Website** built with **TailwindCSS**
 ---
 
 ## 📷 Preview
-![Portfolio Screenshot](assets/preview.png)  
+![Portfolio Screenshot](preview.png)
 
 ---
 
