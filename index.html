@@ -9,7 +9,7 @@
   html {scroll-behavior: smooth;}
   body {font-family:sans-serif; background:#f9fafb; color:#111827;}
   body.dark {background:#111827; color:#f9fafb;}
-  section {padding:4rem 1rem;}
+  section {padding:4rem 1rem; opacity:0; transform:translateY(50px);}
   nav a.active {color:#3b82f6; font-weight:bold;}
   #progressBar {position: fixed; top:0; left:0; height:5px; width:0%; background: linear-gradient(to right,#4f46e5,#3b82f6); z-index:60; transition: width 0.25s ease-out;}
   #backToTop {position:fixed; bottom:20px; right:20px; display:none; z-index:50; opacity:0; transform:translateY(20px); transition: all 0.3s ease-in-out;}
@@ -159,6 +159,18 @@
   </div>
 </section>
 
+<!-- Project Modal -->
+<div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded max-w-lg w-full relative">
+    <button id="closeModal" class="absolute top-2 right-2 text-xl">✖</button>
+    <img id="modalImg" src="" alt="Project Image" class="w-full mb-4 rounded shadow">
+    <h3 id="modalTitle" class="text-2xl font-bold mb-2 text-indigo-600"></h3>
+    <p id="modalDesc" class="mb-2"></p>
+    <p id="modalTech" class="text-gray-600 dark:text-gray-300 font-semibold"></p>
+    <a id="modalLink" href="#" target="_blank" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">View Project</a>
+  </div>
+</div>
+
 <!-- Testimonials Section -->
 <section id="testimonials" class="bg-gray-100 dark:bg-gray-800">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Testimonials</h2>
@@ -201,94 +213,94 @@
 
 <!-- Scripts -->
 <script>
-  // Typing Effect
-  const phrases=["Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
-  let i=0,j=0;
-  const typingElem=document.getElementById("typing-text");
-  (function type(){
-    let txt=phrases[i].substring(0,j+1);
-    typingElem.textContent=txt;
-    j++;
-    if(j===phrases[i].length){i++; j=0; setTimeout(type,1500);}
-    else setTimeout(type,100);
-    if(i===phrases.length)i=0;
-  })();
+const phrases=["Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
+// Typing Animation
+const typingElem=document.getElementById("typing-text");
+let phraseIndex=0,charIndex=0,isDeleting=false;
+function typeLoop(){
+  const current=phrases[phraseIndex];
+  if(isDeleting){typingElem.textContent=current.substring(0,charIndex--); if(charIndex<0){isDeleting=false; phraseIndex=(phraseIndex+1)%phrases.length;}}
+  else{typingElem.textContent=current.substring(0,charIndex++); if(charIndex>current.length){isDeleting=true;}}
+  setTimeout(typeLoop,isDeleting?50:150);
+} typeLoop();
 
-  // Dark Mode Toggle
-  document.getElementById("darkModeToggle").addEventListener("click",()=>{document.body.classList.toggle("dark");});
+// Dark Mode Toggle
+const darkToggle=document.getElementById("darkModeToggle");
+if(localStorage.getItem("theme")==="dark") document.body.classList.add("dark");
+darkToggle.addEventListener('click',()=>{
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light");
+});
 
-  // Mobile Menu
-  const menuBtn=document.getElementById("menu-btn");
-  const menu=document.getElementById("menu");
-  menuBtn.addEventListener("click",()=>{menu.classList.toggle("hidden");});
+// Navbar mobile menu
+const menuBtn=document.getElementById("menu-btn");
+const menu=document.getElementById("menu");
+menuBtn.addEventListener('click',()=>menu.classList.toggle("hidden"));
 
-  // Scroll progress bar
-  const progressBar=document.getElementById("progressBar");
-  window.addEventListener("scroll",()=>{
-    let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
-    let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-    let scrolled=(winScroll/height)*100;
-    progressBar.style.width=scrolled+"%";
+// Scroll progress bar
+const progressBar=document.getElementById("progressBar");
+window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop;const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;progressBar.style.width=(winScroll/height*100)+"%";});
+
+// Navbar background on scroll
+const navbar=document.getElementById("navbar");
+window.addEventListener('scroll',()=>{navbar.classList.toggle("solid",window.scrollY>50); navbar.classList.toggle("transparent",window.scrollY<=50);});
+
+// Back to top
+const backTop=document.getElementById("backToTop");
+window.addEventListener('scroll',()=>{if(window.scrollY>300) backTop.classList.add("show"); else backTop.classList.remove("show");});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// Reveal Sections
+const sections=document.querySelectorAll('section');
+function revealSections(){sections.forEach(section=>{if(section.getBoundingClientRect().top<window.innerHeight-100){section.style.opacity=1; section.style.transform='translateY(0)'; section.style.transition='all 0.8s ease-out';}})}
+window.addEventListener('scroll',revealSections);
+window.addEventListener('load',revealSections);
+
+// Skills animation
+function animateSkills(){document.querySelectorAll('.skill-bar').forEach(skill=>{if(skill.getBoundingClientRect().top<window.innerHeight*0.8){skill.querySelector('div div').style.width=skill.getAttribute('data-progress')+'%';}})}
+window.addEventListener('scroll',animateSkills);
+window.addEventListener('load',animateSkills);
+
+// Counters
+const counters=document.querySelectorAll('.counter');
+counters.forEach(counter=>{const updateCount=()=>{const target=+counter.getAttribute('data-target');let count=+counter.innerText;let inc=Math.ceil(target/200); if(count<target){counter.innerText=count+inc; setTimeout(updateCount,20);}else{counter.innerText=target;}}; updateCount();});
+
+// Navbar active links
+const navLinks=document.querySelectorAll('#nav-links a');
+window.addEventListener('scroll',()=>{let current='';sections.forEach(sec=>{if(window.scrollY>=sec.offsetTop-60) current=sec.getAttribute('id');});navLinks.forEach(link=>{link.classList.remove('active'); if(link.getAttribute('href').includes(current)) link.classList.add('active');});});
+
+// Project Modal
+const modal=document.getElementById('projectModal');
+const modalTitle=document.getElementById('modalTitle');
+const modalDesc=document.getElementById('modalDesc');
+const modalTech=document.getElementById('modalTech');
+const modalImg=document.getElementById('modalImg');
+const modalLink=document.getElementById('modalLink');
+const closeModal=document.getElementById('closeModal');
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('click',e=>{e.preventDefault(); modalTitle.textContent=card.querySelector('h3').innerText; modalDesc.textContent=card.querySelector('p').innerText; modalTech.textContent="Tech Stack: "+card.getAttribute('data-tech'); modalImg.src="https://via.placeholder.com/400x250.png?text="+encodeURIComponent(card.querySelector('h3').innerText); modalLink.href=card.href; modal.classList.remove('hidden');});
+});
+closeModal.addEventListener('click',()=>modal.classList.add('hidden'));
+window.addEventListener('click',e=>{if(e.target==modal) modal.classList.add('hidden');});
+
+// Project filtering
+const filterBtns=document.querySelectorAll('.project-filter button');
+const projectCards=document.querySelectorAll('.project-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.getAttribute('data-filter');
+    projectCards.forEach(card=>{card.style.display=(filter==='all'||card.getAttribute('data-tech')===filter)?'block':'none';});
   });
+});
 
-  // Navbar color
-  const navbar=document.getElementById("navbar");
-  window.addEventListener("scroll",()=>{if(window.scrollY>50){navbar.classList.add("solid"); navbar.classList.remove("transparent");}else{navbar.classList.remove("solid"); navbar.classList.add("transparent");}});
-
-  // Back to Top
-  const backBtn=document.getElementById("backToTop");
-  window.addEventListener("scroll",()=>{if(window.scrollY>400){backBtn.classList.add("show");} else {backBtn.classList.remove("show");}});
-  backBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
-
-  // Counters
-  const counters=document.querySelectorAll('.counter');
-  counters.forEach(counter=>{
-    const updateCount=()=>{
-      const target=+counter.getAttribute('data-target');
-      const count=+counter.innerText;
-      const inc=Math.ceil(target/200);
-      if(count<target){counter.innerText=count+inc; setTimeout(updateCount,10);} else {counter.innerText=target;}
-    };
-    updateCount();
-  });
-
-  // Skill Bars Animation
-  const skillBars=document.querySelectorAll('.skill-bar');
-  function animateSkills(){
-    skillBars.forEach(bar=>{
-      const progress=bar.getAttribute('data-progress');
-      bar.querySelector('div div').style.width=progress+'%';
-    });
-  }
-  window.addEventListener('load',animateSkills);
-
-  // Testimonials Slider
-  const slider=document.getElementById('testimonialSlider');
-  let currentSlide=0;
-  const slides=slider.children.length;
-  document.getElementById('nextTestimonial').addEventListener('click',()=>{
-    currentSlide=(currentSlide+1)%slides;
-    slider.style.transform=`translateX(-${currentSlide*100}%)`;
-  });
-  document.getElementById('prevTestimonial').addEventListener('click',()=>{
-    currentSlide=(currentSlide-1+slides)%slides;
-    slider.style.transform=`translateX(-${currentSlide*100}%)`;
-  });
-
-  // Projects Filter
-  const projectBtns=document.querySelectorAll('.project-filter button');
-  const projectCards=document.querySelectorAll('.project-card');
-  projectBtns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      projectBtns.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter=btn.getAttribute('data-filter');
-      projectCards.forEach(card=>{
-        if(filter==='all'||card.getAttribute('data-tech')===filter) card.style.display='block';
-        else card.style.display='none';
-      });
-    });
-  });
+// Testimonial slider
+let currentTest=0;
+const slider=document.getElementById('testimonialSlider');
+const testimonials=document.querySelectorAll('#testimonialSlider > div');
+document.getElementById('prevTestimonial').addEventListener('click',()=>{currentTest=(currentTest-1+testimonials.length)%testimonials.length; slider.style.transform='translateX(-'+currentTest*100+'%)';});
+document.getElementById('nextTestimonial').addEventListener('click',()=>{currentTest=(currentTest+1)%testimonials.length; slider.style.transform='translateX(-'+currentTest*100+'%)';});
 </script>
 </body>
 </html>
