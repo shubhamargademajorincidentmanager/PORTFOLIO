@@ -7,7 +7,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* Basic Styles */
 html {scroll-behavior: smooth; transition: background 0.3s, color 0.3s;}
 body {font-family:sans-serif; background:#f9fafb; color:#111827;}
 body.dark {background:#111827; color:#f9fafb;}
@@ -24,11 +23,8 @@ nav.solid {background: rgba(17,24,39,0.95); padding:1rem 1rem; box-shadow:0 2px 
 .typing-cursor {display:inline-block;width:2px;background:#000;margin-left:4px; animation:blink 0.7s infinite;}
 body.dark .typing-cursor {background:#3b82f6;}
 @keyframes blink {50%{background:transparent;}}
-/* Particle Background */
 #heroParticles {position:absolute; width:100%; height:100%; top:0; left:0; z-index:0;}
-/* Counters */
 .counter {font-size:2rem; font-weight:bold;}
-/* Projects Filter */
 .project-filter button {margin-right:0.5rem; margin-bottom:0.5rem; padding:0.3rem 0.6rem; border-radius:0.3rem; border:1px solid #ccc; cursor:pointer;}
 .project-filter button.active {background:#3b82f6; color:white; border:none;}
 </style>
@@ -73,7 +69,16 @@ body.dark .typing-cursor {background:#3b82f6;}
   <div class="relative z-10">
     <h1 class="text-5xl font-bold mb-4">Shubham Argade</h1>
     <p class="text-xl mb-2"><span id="typing-text"></span><span class="typing-cursor"></span></p>
-    <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
+    <p class="text-md mb-6">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
+
+    <!-- Download Resume Button -->
+    <a href="Shubham_Argade_Resume.pdf" target="_blank" 
+       class="bg-white text-indigo-600 px-6 py-3 rounded font-semibold 
+              hover:bg-indigo-600 hover:text-white transform hover:scale-105 
+              transition duration-300 mb-4 inline-block">
+       ⬇ Download Resume
+    </a>
+
     <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white text-3xl">⬇</a>
   </div>
 </section>
@@ -195,17 +200,6 @@ body.dark .typing-cursor {background:#3b82f6;}
 
 <!-- Back to Top -->
 <button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">⬆ Top</button>
-
-<!-- Project Modal -->
-<div id="projectModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-  <div class="bg-white dark:bg-gray-700 rounded p-6 max-w-2xl relative">
-    <button id="closeModal" class="absolute top-2 right-2 text-xl font-bold">×</button>
-    <h3 class="text-xl font-bold mb-2" id="modalTitle"></h3>
-    <p id="modalDesc" class="mb-4"></p>
-    <p id="modalTech" class="mb-4 text-sm text-gray-600 dark:text-gray-300"></p>
-    <a id="modalLink" href="#" target="_blank" class="text-indigo-600 font-semibold">View on GitHub</a>
-  </div>
-</div>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
