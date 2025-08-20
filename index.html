@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubham Argade | Major Incident Manager</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   html {scroll-behavior: smooth;}
   body {font-family:sans-serif; background:#f9fafb; color:#111827;}
@@ -21,12 +22,17 @@
   body.dark .typing-cursor {background:#3b82f6;}
   @keyframes blink {50%{background:transparent;}}
   .counter {font-size:2rem; font-weight:bold;}
-  .project-filter button {margin-right:0.5rem; margin-bottom:0.5rem; padding:0.3rem 0.6rem; border-radius:0.3rem; border:1px solid #ccc; cursor:pointer;}
-  .project-filter button.active {background:#3b82f6; color:white; border:none;}
-  .skill-bar {margin-bottom:1rem;}
   .tooltip {position: relative; cursor: pointer;}
   .tooltip::after {content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #111827; color: #f9fafb; padding: 0.3rem 0.5rem; font-size: 0.75rem; border-radius: 0.25rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s;}
   .tooltip:hover::after {opacity: 1;}
+  /* Timeline */
+  .timeline {position: relative; margin-left:2rem;}
+  .timeline::before {content:""; position:absolute; left:15px; top:0; bottom:0; width:4px; background:#3b82f6; border-radius:2px;}
+  .timeline-item {position: relative; margin-bottom:2rem; padding-left:2.5rem;}
+  .timeline-item::before {content:""; position:absolute; left:-0.5rem; width:1rem; height:1rem; border-radius:50%; background:#3b82f6; top:0;}
+  .skill-circle {position:relative; width:120px; height:120px; margin:auto;}
+  .skill-circle canvas {position:absolute; top:0; left:0;}
+  .skill-circle span {position:absolute; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1rem;}
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans relative">
@@ -64,7 +70,9 @@
 </div>
 
 <!-- Hero Section -->
-<section id="hero" class="relative bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-32 text-center">
+<section id="hero" class="relative bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-32 text-center overflow-hidden">
+  <!-- Particle background -->
+  <canvas id="particles" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
   <div class="relative z-10">
     <h1 class="text-5xl font-bold mb-4">Shubham Argade</h1>
     <p class="text-xl mb-2"><span id="typing-text"></span><span class="typing-cursor"></span></p>
@@ -81,7 +89,7 @@
 </section>
 
 <!-- Skills Section -->
-<section id="skills" class="bg-gray-100 dark:bg-gray-800">
+<section id="skills" class="bg-gray-100 dark:bg-gray-800 py-16">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-indigo-600">Skills & Stats</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
@@ -90,23 +98,36 @@
       <div><p>Clients</p><p class="counter" data-target="3">0</p></div>
       <div><p>Years Experience</p><p class="counter" data-target="3">0</p></div>
     </div>
-
-    <div class="text-left space-y-6">
-      <div class="skill-bar flex items-center space-x-4" data-progress="90" data-tooltip="90%"><span class="text-indigo-600 text-2xl tooltip">🚨</span><div class="flex-1"><p class="font-semibold">Major Incident Management</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%"><span class="text-indigo-600 text-2xl tooltip">🛠️</span><div class="flex-1"><p class="font-semibold">ITIL/ITSM</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="80" data-tooltip="80%"><span class="text-indigo-600 text-2xl tooltip">☁️</span><div class="flex-1"><p class="font-semibold">Azure</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="75" data-tooltip="75%"><span class="text-indigo-600 text-2xl tooltip">📊</span><div class="flex-1"><p class="font-semibold">Power BI</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
-      <div class="skill-bar flex items-center space-x-4" data-progress="85" data-tooltip="85%"><span class="text-indigo-600 text-2xl tooltip">🔍</span><div class="flex-1"><p class="font-semibold">Problem & RCA Analysis</p><div class="w-full bg-gray-300 dark:bg-gray-700 h-4 rounded-full"><div class="bg-indigo-600 h-4 rounded-full w-0"></div></div></div></div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="skill-circle">
+        <canvas id="skill1" width="120" height="120"></canvas>
+        <span>Major Incident<br>Management</span>
+      </div>
+      <div class="skill-circle">
+        <canvas id="skill2" width="120" height="120"></canvas>
+        <span>ITIL/ITSM</span>
+      </div>
+      <div class="skill-circle">
+        <canvas id="skill3" width="120" height="120"></canvas>
+        <span>Azure</span>
+      </div>
+      <div class="skill-circle">
+        <canvas id="skill4" width="120" height="120"></canvas>
+        <span>Power BI</span>
+      </div>
+      <div class="skill-circle">
+        <canvas id="skill5" width="120" height="120"></canvas>
+        <span>Problem & RCA</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Experience Section -->
+<!-- Experience Section with Timeline -->
 <section id="experience" class="max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Professional Experience</h2>
-  <div class="relative border-l-2 border-indigo-600 ml-6">
-    <div class="mb-10 ml-4 relative">
-      <span class="absolute -left-4 w-8 h-8 bg-indigo-600 rounded-full top-0"></span>
+  <div class="timeline">
+    <div class="timeline-item">
       <h3 class="text-xl font-semibold">HCL Technologies – Senior Analyst / Major Incident Manager</h3>
       <p class="text-sm text-gray-500">Client: Barclays | May 2024 – Present</p>
       <ul class="list-disc ml-5 mt-2">
@@ -114,8 +135,7 @@
         <li>Created RCA & PIR reports, reducing repeat issues by 30%.</li>
       </ul>
     </div>
-    <div class="mb-10 ml-4 relative">
-      <span class="absolute -left-4 w-8 h-8 bg-indigo-600 rounded-full top-0"></span>
+    <div class="timeline-item">
       <h3 class="text-xl font-semibold">Tech Mahindra – Software Engineer / Major Incident Manager</h3>
       <p class="text-sm text-gray-500">Client: Morgan Stanley | Aug 2021 – Sep 2023</p>
       <ul class="list-disc ml-5 mt-2">
@@ -127,7 +147,7 @@
 </section>
 
 <!-- Education Section -->
-<section id="education" class="bg-gray-100 dark:bg-gray-800">
+<section id="education" class="bg-gray-100 dark:bg-gray-800 py-16">
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-6 text-indigo-600">Education & Certifications</h2>
     <ul class="list-disc ml-5 space-y-2 text-lg">
@@ -140,7 +160,7 @@
 </section>
 
 <!-- Projects Section -->
-<section id="projects" class="max-w-4xl mx-auto">
+<section id="projects" class="max-w-4xl mx-auto py-16">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Projects</h2>
   <div class="text-center mb-4 project-filter">
     <button data-filter="all" class="active">All</button>
@@ -159,48 +179,33 @@
   </div>
 </section>
 
-<!-- Project Modal -->
-<div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-  <div class="bg-white dark:bg-gray-800 p-6 rounded max-w-lg w-full relative">
-    <button id="closeModal" class="absolute top-2 right-2 text-xl">✖</button>
-    <img id="modalImg" src="" alt="Project Image" class="w-full mb-4 rounded shadow">
-    <h3 id="modalTitle" class="text-2xl font-bold mb-2 text-indigo-600"></h3>
-    <p id="modalDesc" class="mb-2"></p>
-    <p id="modalTech" class="text-gray-600 dark:text-gray-300 font-semibold"></p>
-    <a id="modalLink" href="#" target="_blank" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">View Project</a>
-  </div>
-</div>
-
 <!-- Testimonials Section -->
-<section id="testimonials" class="bg-gray-100 dark:bg-gray-800">
+<section id="testimonials" class="bg-gray-100 dark:bg-gray-800 py-16">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600 text-center">Testimonials</h2>
   <div class="max-w-3xl mx-auto relative overflow-hidden">
     <div id="testimonialSlider" class="flex transition-transform duration-500">
-      <div class="min-w-full p-5"><p>"Shubham handled critical incidents at Barclays with great leadership and speed." – Manager</p></div>
-      <div class="min-w-full p-5"><p>"Excellent Major Incident Manager, proactive and detail-oriented." – Team Lead</p></div>
+      <div class="min-w-full p-5">
+        <p>"Shubham handled critical incidents at Barclays with great leadership and speed." – Manager</p>
+      </div>
+      <div class="min-w-full p-5">
+        <p>"Excellent Major Incident Manager, proactive and detail-oriented." – Team Lead</p>
+      </div>
     </div>
     <button id="prevTestimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">◀</button>
     <button id="nextTestimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">▶</button>
   </div>
 </section>
 
-<!-- GitHub Stats & Activity -->
-<section id="github-stats" class="max-w-4xl mx-auto text-center">
-  <h2 class="text-3xl font-bold mb-6 text-indigo-600">GitHub Stats</h2>
-  <img src="https://github-readme-stats.vercel.app/api?username=shubhamargademajorincidentmanager&show_icons=true&theme=radical" alt="GitHub Stats" class="mx-auto rounded shadow-lg">
-</section>
-
-<section id="github-graph" class="max-w-4xl mx-auto text-center">
-  <h2 class="text-3xl font-bold mb-6 text-indigo-600">GitHub Activity</h2>
-  <img src="https://ghchart.rshah.org/shubhamargademajorincidentmanager" alt="GitHub Chart" class="mx-auto">
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="max-w-4xl mx-auto text-center">
+<!-- Contact Section with Form -->
+<section id="contact" class="max-w-4xl mx-auto text-center py-16">
   <h2 class="text-3xl font-bold mb-6 text-indigo-600">Contact Me</h2>
-  <p class="text-lg">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a></p>
-  <p class="text-lg">📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
-  <p class="text-lg mt-4">🌐 <a href="https://github.com/shubhamargademajorincidentmanager" target="_blank" class="text-blue-600">GitHub</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600">LinkedIn</a></p>
+  <form action="https://formspree.io/f/yourformid" method="POST" class="max-w-xl mx-auto flex flex-col gap-4">
+    <input type="text" name="name" placeholder="Your Name" required class="p-3 rounded border border-gray-300">
+    <input type="email" name="email" placeholder="Your Email" required class="p-3 rounded border border-gray-300">
+    <textarea name="message" placeholder="Your Message" required class="p-3 rounded border border-gray-300"></textarea>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Send Message</button>
+  </form>
+  <p class="text-lg mt-6">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a> | 📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
 </section>
 
 <!-- Footer -->
@@ -213,8 +218,8 @@
 
 <!-- Scripts -->
 <script>
-const phrases=["Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
-// Typing Animation
+// Typing animation
+const phrases=["Proactive Major Incident Manager","ITIL/ITSM Expert","Azure & Power BI Enthusiast"];
 const typingElem=document.getElementById("typing-text");
 let phraseIndex=0,charIndex=0,isDeleting=false;
 function typeLoop(){
@@ -224,24 +229,21 @@ function typeLoop(){
   setTimeout(typeLoop,isDeleting?50:150);
 } typeLoop();
 
-// Dark Mode Toggle
+// Dark mode
 const darkToggle=document.getElementById("darkModeToggle");
 if(localStorage.getItem("theme")==="dark") document.body.classList.add("dark");
-darkToggle.addEventListener('click',()=>{
-  document.body.classList.toggle("dark");
-  localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light");
-});
+darkToggle.addEventListener('click',()=>{document.body.classList.toggle("dark"); localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light");});
 
-// Navbar mobile menu
+// Mobile menu
 const menuBtn=document.getElementById("menu-btn");
 const menu=document.getElementById("menu");
 menuBtn.addEventListener('click',()=>menu.classList.toggle("hidden"));
 
-// Scroll progress bar
+// Scroll progress
 const progressBar=document.getElementById("progressBar");
-window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop;const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;progressBar.style.width=(winScroll/height*100)+"%";});
+window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop; const height=document.documentElement.scrollHeight-document.documentElement.clientHeight; progressBar.style.width=(winScroll/height*100)+"%";});
 
-// Navbar background on scroll
+// Navbar background
 const navbar=document.getElementById("navbar");
 window.addEventListener('scroll',()=>{navbar.classList.toggle("solid",window.scrollY>50); navbar.classList.toggle("transparent",window.scrollY<=50);});
 
@@ -256,51 +258,39 @@ function revealSections(){sections.forEach(section=>{if(section.getBoundingClien
 window.addEventListener('scroll',revealSections);
 window.addEventListener('load',revealSections);
 
-// Skills animation
-function animateSkills(){document.querySelectorAll('.skill-bar').forEach(skill=>{if(skill.getBoundingClientRect().top<window.innerHeight*0.8){skill.querySelector('div div').style.width=skill.getAttribute('data-progress')+'%';}})}
-window.addEventListener('scroll',animateSkills);
-window.addEventListener('load',animateSkills);
-
 // Counters
 const counters=document.querySelectorAll('.counter');
-counters.forEach(counter=>{const updateCount=()=>{const target=+counter.getAttribute('data-target');let count=+counter.innerText;let inc=Math.ceil(target/200); if(count<target){counter.innerText=count+inc; setTimeout(updateCount,20);}else{counter.innerText=target;}}; updateCount();});
+counters.forEach(counter=>{const updateCount=()=>{const target=+counter.getAttribute('data-target'); let count=+counter.innerText; let inc=Math.ceil(target/200); if(count<target){counter.innerText=count+inc; setTimeout(updateCount,20);}else{counter.innerText=target;}}; updateCount();});
 
 // Navbar active links
 const navLinks=document.querySelectorAll('#nav-links a');
-window.addEventListener('scroll',()=>{let current='';sections.forEach(sec=>{if(window.scrollY>=sec.offsetTop-60) current=sec.getAttribute('id');});navLinks.forEach(link=>{link.classList.remove('active'); if(link.getAttribute('href').includes(current)) link.classList.add('active');});});
+window.addEventListener('scroll',()=>{let fromTop=window.scrollY+200; navLinks.forEach(link=>{const section=document.querySelector(link.hash); if(section.offsetTop<=fromTop && section.offsetTop+section.offsetHeight>fromTop){link.classList.add('active');} else{link.classList.remove('active');}});});
 
-// Project Modal
-const modal=document.getElementById('projectModal');
-const modalTitle=document.getElementById('modalTitle');
-const modalDesc=document.getElementById('modalDesc');
-const modalTech=document.getElementById('modalTech');
-const modalImg=document.getElementById('modalImg');
-const modalLink=document.getElementById('modalLink');
-const closeModal=document.getElementById('closeModal');
-document.querySelectorAll('.project-card').forEach(card=>{
-  card.addEventListener('click',e=>{e.preventDefault(); modalTitle.textContent=card.querySelector('h3').innerText; modalDesc.textContent=card.querySelector('p').innerText; modalTech.textContent="Tech Stack: "+card.getAttribute('data-tech'); modalImg.src="https://via.placeholder.com/400x250.png?text="+encodeURIComponent(card.querySelector('h3').innerText); modalLink.href=card.href; modal.classList.remove('hidden');});
-});
-closeModal.addEventListener('click',()=>modal.classList.add('hidden'));
-window.addEventListener('click',e=>{if(e.target==modal) modal.classList.add('hidden');});
-
-// Project filtering
-const filterBtns=document.querySelectorAll('.project-filter button');
-const projectCards=document.querySelectorAll('.project-card');
-filterBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    filterBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter=btn.getAttribute('data-filter');
-    projectCards.forEach(card=>{card.style.display=(filter==='all'||card.getAttribute('data-tech')===filter)?'block':'none';});
-  });
-});
+// Skill circles
+function createSkillCircle(id,value,color){const ctx=document.getElementById(id).getContext('2d');new Chart(ctx,{type:'doughnut',data:{datasets:[{data:[value,100-value],backgroundColor:[color,'#e5e7eb'],borderWidth:0}]},options:{cutout:'75%',plugins:{legend:{display:false},tooltip:{enabled:false}},responsive:false,animation:{animateRotate:true,animateScale:true}}});}
+createSkillCircle('skill1',90,'#6366f1'); createSkillCircle('skill2',85,'#f59e0b'); createSkillCircle('skill3',70,'#10b981'); createSkillCircle('skill4',75,'#3b82f6'); createSkillCircle('skill5',80,'#ec4899');
 
 // Testimonial slider
-let currentTest=0;
-const slider=document.getElementById('testimonialSlider');
-const testimonials=document.querySelectorAll('#testimonialSlider > div');
-document.getElementById('prevTestimonial').addEventListener('click',()=>{currentTest=(currentTest-1+testimonials.length)%testimonials.length; slider.style.transform='translateX(-'+currentTest*100+'%)';});
-document.getElementById('nextTestimonial').addEventListener('click',()=>{currentTest=(currentTest+1)%testimonials.length; slider.style.transform='translateX(-'+currentTest*100+'%)';});
+const slider=document.getElementById("testimonialSlider");
+const totalSlides=slider.children.length; let index=0;
+document.getElementById("nextTestimonial").addEventListener('click',()=>{index=(index+1)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;});
+document.getElementById("prevTestimonial").addEventListener('click',()=>{index=(index-1+totalSlides)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;});
+setInterval(()=>{index=(index+1)%totalSlides; slider.style.transform=`translateX(-${index*100}%)`;},5000);
+
+// Project Filter
+const projectBtns=document.querySelectorAll(".project-filter button");
+const projects=document.querySelectorAll(".project-card");
+projectBtns.forEach(btn=>{btn.addEventListener('click',()=>{projectBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const filter=btn.getAttribute('data-filter'); projects.forEach(p=>{p.style.display=(filter==='all'||p.getAttribute('data-tech')===filter)?'block':'none';});});});
+
+// Simple particles background
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let particles=[]; for(let i=0;i<80;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,d:Math.random()*1});}
+function drawParticles(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.5)';ctx.fill();p.y-=p.d; if(p.y<0) p.y=canvas.height;}); requestAnimationFrame(drawParticles);}
+drawParticles();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 </script>
+
 </body>
 </html>
