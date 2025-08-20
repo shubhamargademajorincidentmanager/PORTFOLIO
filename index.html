@@ -4,347 +4,252 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shubham Argade | Major Incident Manager</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html {
-      scroll-behavior: smooth;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    /* Scroll Progress Bar */
-    #progressBar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 5px;
-      background: linear-gradient(to right, #4f46e5, #3b82f6);
-      width: 0%;
-      z-index: 60;
-      transition: width 0.25s ease-out;
-    }
-
-    /* Back to Top Animation */
-    #backToTop {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      z-index: 50;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease-in-out;
-    }
-    #backToTop.show {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-      animation: bounce 0.6s ease;
-    }
-    @keyframes bounce {
-      0% { transform: translateY(20px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* Dark Mode */
-    body.dark {
-      background-color: #111827;
-      color: #f9fafb;
-    }
-    body.dark section {
-      background-color: #1f2937;
-      color: #f9fafb;
-    }
-    body.dark footer {
-      background-color: #000;
-    }
-
-    /* Navbar Transparent to Solid */
-    nav {
-      transition: background-color 0.4s, padding 0.4s;
-    }
-    nav.transparent {
-      background: transparent;
-      padding: 1.5rem 1rem;
-    }
-    nav.solid {
-      background: rgba(17, 24, 39, 0.95);
-      padding: 1rem 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Typing Cursor */
-    .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      background: #000;
-      margin-left: 4px;
-      animation: blink 0.7s infinite;
-    }
-    body.dark .typing-cursor {
-      background: #3b82f6;
-    }
-    @keyframes blink {
-      50% { background: transparent; }
-    }
-
-    /* Fade-in Animation */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
-    }
-    .fade-in.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Active Nav Link */
-    nav a.active {
-      color: #3b82f6;
-      font-weight: bold;
-    }
+    html { scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
+    #progressBar { position: fixed; top:0; left:0; height:5px; background: linear-gradient(to right,#4f46e5,#3b82f6); width:0%; z-index:60; transition: width 0.25s ease-out; }
+    #backToTop { position: fixed; bottom: 20px; right: 20px; display: none; z-index:50; opacity:0; transform: translateY(20px); transition: all 0.3s ease-in-out; }
+    #backToTop.show { display:block; opacity:1; transform: translateY(0); animation:bounce 0.6s ease; }
+    @keyframes bounce {0%{transform:translateY(20px);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+    body.dark { background-color:#111827; color:#f9fafb; }
+    body.dark section { background-color:#1f2937; color:#f9fafb; }
+    body.dark footer { background-color:#000; }
+    nav { transition: background-color 0.4s, padding 0.4s; }
+    nav.transparent { background: transparent; padding:1.5rem 1rem; }
+    nav.solid { background: rgba(17,24,39,0.95); padding:1rem 1rem; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+    .typing-cursor { display:inline-block; width:2px; background:#000; margin-left:4px; animation:blink 0.7s infinite; }
+    body.dark .typing-cursor { background:#3b82f6; }
+    @keyframes blink {50% {background:transparent;}}
+    .fade-in { opacity:0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .fade-in.show { opacity:1; transform:translateY(0);}
+    nav a.active { color:#3b82f6; font-weight:bold;}
+    .skill-btn:hover { cursor:pointer; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-  <!-- Progress Bar -->
-  <div id="progressBar"></div>
+<!-- Progress Bar -->
+<div id="progressBar"></div>
 
-  <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-40 flex justify-between items-center px-4 py-3 transparent text-white">
-    <h1 class="text-lg font-bold">Shubham Argade</h1>
-
-    <div class="flex items-center space-x-4">
-      <!-- Desktop Menu -->
-      <div id="nav-links" class="hidden md:flex space-x-6">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <!-- Dark Mode Toggle -->
-      <button id="darkModeToggle" class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-700">
-        🌙
-      </button>
-
-      <!-- Mobile Hamburger -->
-      <button id="menu-btn" class="md:hidden focus:outline-none text-xl">
-        ☰
-      </button>
+<!-- Navbar -->
+<nav class="fixed w-full top-0 z-40 flex justify-between items-center px-4 py-3 transparent text-white">
+  <h1 class="text-lg font-bold">Shubham Argade</h1>
+  <div class="flex items-center space-x-4">
+    <div id="nav-links" class="hidden md:flex space-x-6">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
     </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div id="menu" class="hidden md:hidden bg-gray-800 text-white flex-col space-y-2 px-4 py-3">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+    <button id="darkModeToggle" class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-700">🌙</button>
+    <button id="menu-btn" class="md:hidden focus:outline-none text-xl">☰</button>
   </div>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-28 mt-12 fade-in">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl font-bold mb-4">Shubham Argade</h1>
-      <p class="text-xl mb-2">
-        <span id="typing-text"></span>
-        <span class="typing-cursor"></span>
-      </p>
-      <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
-    </div>
-  </section>
+<!-- Mobile Menu -->
+<div id="menu" class="hidden md:hidden bg-gray-800 text-white flex-col space-y-2 px-4 py-3">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#projects">Projects</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contact">Contact</a>
+</div>
 
-  <!-- About -->
-  <section id="about" class="py-16 px-6 max-w-4xl mx-auto fade-in">
-    <h2 class="text-2xl font-bold mb-6 text-indigo-600">About Me</h2>
-    <p class="leading-relaxed text-lg">
-      Major Incident Manager with 3.5+ years of experience in handling high-severity incidents, ITIL processes, RCA, and stakeholder communication. Skilled in team coordination and leadership to minimize business impact and ensure service reliability.
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-28 mt-12 fade-in text-center" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">Shubham Argade</h1>
+    <p class="text-xl mb-2">
+      <span id="typing-text"></span><span class="typing-cursor"></span>
     </p>
-  </section>
+    <p class="text-md">📍 Pune, India | 📧 shubhamargade1176@gmail.com | 📱 +91 7738933420</p>
+  </div>
+</section>
 
-  <!-- Skills -->
-  <section id="skills" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6 text-indigo-600">Skills</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Major Incident Management</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Incident Management</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Crisis Management</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Root Cause Analysis</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SLA Management</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Change & Problem Management</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Post-Incident Review</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Azure Cloud</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">ServiceNow</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SolarWinds</span>
-        <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Power BI</span>
-      </div>
+<!-- About -->
+<section id="about" class="py-16 px-6 max-w-4xl mx-auto fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600">About Me</h2>
+  <p class="leading-relaxed text-lg">
+    Major Incident Manager with 3.5+ years of experience in handling high-severity incidents, ITIL processes, RCA, and stakeholder communication. Skilled in team coordination and leadership to minimize business impact and ensure service reliability.
+  </p>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Skills</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Major Incident Management</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Incident Management</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Crisis Management</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Root Cause Analysis</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SLA Management</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Change & Problem Management</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Post-Incident Review</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Azure Cloud</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">ServiceNow</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">SolarWinds</span>
+      <span class="bg-white dark:bg-gray-700 p-3 rounded shadow">Power BI</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Experience -->
-  <section id="experience" class="py-16 px-6 max-w-4xl mx-auto fade-in">
-    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Professional Experience</h2>
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold">HCL Technologies – Senior Analyst / Major Incident Manager</h3>
-      <p class="text-sm text-gray-500">Client: Barclays | May 2024 – Present</p>
-      <ul class="list-disc ml-5 mt-3 space-y-2">
-        <li>Orchestrated resolution of P1/P2 Azure cloud banking incidents, minimizing customer impact.</li>
-        <li>Facilitated bridge calls with Azure, infra, and vendor teams to restore services faster.</li>
-        <li>Created RCA & PIR reports, reducing repeat issues by 30%.</li>
-        <li>Built Power BI dashboards for SLA breaches & trends.</li>
-      </ul>
+<!-- Experience -->
+<section id="experience" class="py-16 px-6 max-w-4xl mx-auto fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600">Professional Experience</h2>
+  <div class="mb-8">
+    <h3 class="text-xl font-semibold">HCL Technologies – Senior Analyst / Major Incident Manager</h3>
+    <p class="text-sm text-gray-500">Client: Barclays | May 2024 – Present</p>
+    <ul class="list-disc ml-5 mt-3 space-y-2">
+      <li>Orchestrated resolution of P1/P2 Azure cloud banking incidents, minimizing customer impact.</li>
+      <li>Facilitated bridge calls with Azure, infra, and vendor teams to restore services faster.</li>
+      <li>Created RCA & PIR reports, reducing repeat issues by 30%.</li>
+      <li>Built Power BI dashboards for SLA breaches & trends.</li>
+    </ul>
+  </div>
+  <div class="mb-8">
+    <h3 class="text-xl font-semibold">Tech Mahindra – Software Engineer / Major Incident Manager</h3>
+    <p class="text-sm text-gray-500">Client: Morgan Stanley | Aug 2021 – Sep 2023</p>
+    <ul class="list-disc ml-5 mt-3 space-y-2">
+      <li>Directed P1/P2 incidents impacting trading platforms & market data services.</li>
+      <li>Coordinated Desktop, IT & Monitoring teams during critical outages.</li>
+      <li>Partnered with Problem Management to implement fixes reducing issues by 30%.</li>
+      <li>Ensured SLA compliance via ServiceNow tracking.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Education & Certifications</h2>
+    <ul class="list-disc ml-5 space-y-2 text-lg">
+      <li>BE Computer Engineering – Sinhgad Institute (SPPU), Pune | CGPA: 8.0</li>
+      <li>Microsoft Azure Fundamentals (AZ-900)</li>
+      <li>Microsoft Power BI Data Analyst (PL-300)</li>
+      <li>ITIL Foundation V4 Certified</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="py-16 px-6 max-w-4xl mx-auto fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600">Projects</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="https://github.com/shubhamargademajorincidentmanager/project1" target="_blank" class="bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform">
+      <h3 class="text-lg font-semibold mb-2">Incident Dashboard</h3>
+      <p>Power BI dashboard showing SLA and incident trends with real-time metrics.</p>
+    </a>
+    <a href="https://github.com/shubhamargademajorincidentmanager/project2" target="_blank" class="bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform">
+      <h3 class="text-lg font-semibold mb-2">Azure Incident Automation</h3>
+      <p>Automated alert system for P1/P2 incidents using Azure Functions and ServiceNow integration.</p>
+    </a>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600 text-center">Testimonials</h2>
+  <div class="max-w-3xl mx-auto relative overflow-hidden">
+    <div id="testimonialSlider" class="flex transition-transform duration-500">
+      <div class="min-w-full p-5"><p>"Shubham handled critical incidents at Barclays with great leadership and speed." – Manager</p></div>
+      <div class="min-w-full p-5"><p>"Excellent Major Incident Manager, proactive and detail-oriented." – Team Lead</p></div>
     </div>
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold">Tech Mahindra – Software Engineer / Major Incident Manager</h3>
-      <p class="text-sm text-gray-500">Client: Morgan Stanley | Aug 2021 – Sep 2023</p>
-      <ul class="list-disc ml-5 mt-3 space-y-2">
-        <li>Directed P1/P2 incidents impacting trading platforms & market data services.</li>
-        <li>Coordinated Desktop, IT & Monitoring teams during critical outages.</li>
-        <li>Partnered with Problem Management to implement fixes reducing issues by 30%.</li>
-        <li>Ensured SLA compliance via ServiceNow tracking.</li>
-      </ul>
-    </div>
-  </section>
+    <button id="prevTestimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">◀</button>
+    <button id="nextTestimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-2 py-1 rounded">▶</button>
+  </div>
+</section>
 
-  <!-- Education -->
-  <section id="education" class="py-16 px-6 bg-gray-100 dark:bg-gray-800 fade-in">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold mb-6 text-indigo-600">Education & Certifications</h2>
-      <ul class="list-disc ml-5 space-y-2 text-lg">
-        <li>BE Computer Engineering – Sinhgad Institute (SPPU), Pune | CGPA: 8.0</li>
-        <li>Microsoft Azure Fundamentals (AZ-900)</li>
-        <li>Microsoft Power BI Data Analyst (PL-300)</li>
-        <li>ITIL Foundation V4 Certified</li>
-      </ul>
-    </div>
-  </section>
+<!-- GitHub Stats -->
+<section id="github-stats" class="py-16 px-6 max-w-4xl mx-auto text-center fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600">GitHub Stats</h2>
+  <img src="https://github-readme-stats.vercel.app/api?username=shubhamargademajorincidentmanager&show_icons=true&theme=radical" alt="GitHub Stats" class="mx-auto rounded shadow-lg">
+</section>
 
-  <!-- Contact -->
-  <section id="contact" class="py-16 px-6 max-w-4xl mx-auto text-center fade-in">
-    <h2 class="text-2xl font-bold mb-6 text-indigo-600">Contact Me</h2>
-    <p class="text-lg">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a></p>
-    <p class="text-lg">📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
-    <p class="text-lg mt-4">🌐 <a href="https://github.com/shubhamargademajorincidentmanager" target="_blank" class="text-blue-600">GitHub</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600">LinkedIn</a></p>
-  </section>
+<!-- Contact -->
+<section id="contact" class="py-16 px-6 max-w-4xl mx-auto text-center fade-in" data-aos="fade-up">
+  <h2 class="text-2xl font-bold mb-6 text-indigo-600">Contact Me</h2>
+  <p class="text-lg">📧 <a href="mailto:shubhamargade1176@gmail.com" class="text-blue-600">shubhamargade1176@gmail.com</a></p>
+  <p class="text-lg">📱 <a href="tel:+917738933420" class="text-blue-600">+91 7738933420</a></p>
+  <p class="text-lg mt-4">🌐 <a href="https://github.com/shubhamargademajorincidentmanager" target="_blank" class="text-blue-600">GitHub</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600">LinkedIn</a></p>
+</section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white text-center py-4 fade-in">
-    <p>&copy; 2025 Shubham Argade. Built with ❤️ using TailwindCSS.</p>
-  </footer>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white text-center py-4 fade-in" data-aos="fade-up">
+  <p>&copy; 2025 Shubham Argade. Built with ❤️ using TailwindCSS.</p>
+</footer>
 
-  <!-- Back to Top -->
-  <button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">
-    ⬆ Top
-  </button>
+<!-- Back to Top -->
+<button id="backToTop" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700">⬆ Top</button>
 
-  <!-- Scripts -->
-  <script>
-    const nav = document.querySelector("nav");
-    const navLinks = document.querySelectorAll("nav a");
-    const sections = document.querySelectorAll("section");
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
-    const backToTop = document.getElementById('backToTop');
-    const progressBar = document.getElementById('progressBar');
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const typingText = document.getElementById('typing-text');
-    const fadeEls = document.querySelectorAll('.fade-in');
+<!-- Floating Socials -->
+<div class="fixed top-1/3 left-0 flex flex-col space-y-2 z-50">
+  <a href="https://github.com/shubhamargademajorincidentmanager" target="_blank" class="bg-gray-800 text-white px-3 py-2 rounded-r hover:bg-indigo-600 transition">GitHub</a>
+  <a href="https://linkedin.com/in/yourprofile" target="_blank" class="bg-gray-800 text-white px-3 py-2 rounded-r hover:bg-blue-600 transition">LinkedIn</a>
+</div>
 
-    // Typing animation
-    const roles = ["Major Incident Manager", "ITIL V4 Certified", "Problem Solver", "Cloud Enthusiast"];
-    let roleIndex = 0, charIndex = 0, deleting = false;
-    function typeEffect() {
-      let currentRole = roles[roleIndex];
-      if (!deleting) {
-        typingText.textContent = currentRole.substring(0, charIndex++);
-        if (charIndex > currentRole.length) {
-          deleting = true;
-          setTimeout(typeEffect, 1500);
-          return;
-        }
-      } else {
-        typingText.textContent = currentRole.substring(0, charIndex--);
-        if (charIndex < 0) {
-          deleting = false;
-          roleIndex = (roleIndex + 1) % roles.length;
-        }
-      }
-      setTimeout(typeEffect, deleting ? 100 : 150);
-    }
-    typeEffect();
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({ duration:800, easing:'ease-in-out', once:true });
 
-    // Navbar scroll effect
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        nav.classList.remove("transparent");
-        nav.classList.add("solid");
-      } else {
-        nav.classList.remove("solid");
-        nav.classList.add("transparent");
-      }
-    });
+// Typing animation
+const roles = ["Major Incident Manager", "ITIL V4 Certified", "Problem Solver", "Cloud Enthusiast"];
+let roleIndex=0, charIndex=0, deleting=false;
+const typingText=document.getElementById('typing-text');
+function typeEffect() {
+  let currentRole=roles[roleIndex];
+  if(!deleting){ typingText.textContent=currentRole.substring(0,charIndex++); if(charIndex>currentRole.length){deleting=true; setTimeout(typeEffect,1500); return;} } 
+  else { typingText.textContent=currentRole.substring(0,charIndex--); if(charIndex<0){deleting=false; roleIndex=(roleIndex+1)%roles.length;} }
+  setTimeout(typeEffect,deleting?100:150);
+}
+typeEffect();
 
-    // Scroll spy (active section)
-    window.addEventListener("scroll", () => {
-      let current = "";
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 80;
-        if (scrollY >= sectionTop) {
-          current = section.getAttribute("id");
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === "#" + current) {
-          link.classList.add("active");
-        }
-      });
-    });
+// Navbar scroll effect + active link
+const nav=document.querySelector("nav"), navLinks=document.querySelectorAll("nav a"), sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+  if(window.scrollY>50){nav.classList.remove("transparent"); nav.classList.add("solid");}
+  else {nav.classList.remove("solid"); nav.classList.add("transparent");}
+  let current="";
+  sections.forEach(section=>{if(scrollY>=section.offsetTop-80) current=section.getAttribute("id");});
+  navLinks.forEach(link=>{link.classList.remove("active"); if(link.getAttribute("href")==="#"+current) link.classList.add("active");});
+});
 
-    // Mobile menu
-    menuBtn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
+// Mobile menu toggle
+const menuBtn=document.getElementById('menu-btn'), menu=document.getElementById('menu');
+menuBtn.addEventListener('click',()=>{menu.classList.toggle('hidden');});
 
-    // Scroll progress + back to top + fade-in
-    window.addEventListener('scroll', () => {
-      // Back to top
-      if (window.scrollY > 300) backToTop.classList.add("show");
-      else backToTop.classList.remove("show");
+// Back to top + scroll progress + fade-in
+const backToTop=document.getElementById('backToTop'), progressBar=document.getElementById('progressBar'), fadeEls=document.querySelectorAll('.fade-in');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>300) backToTop.classList.add("show"); else backToTop.classList.remove("show");
+  const scrolled=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-document.documentElement.clientHeight))*100;
+  progressBar.style.width=scrolled+"%";
+  fadeEls.forEach(el=>{const rect=el.getBoundingClientRect(); if(rect.top<window.innerHeight-100) el.classList.add("show");});
+});
+backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:"smooth"});});
 
-      // Progress bar
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scrollTop / scrollHeight) * 100;
-      progressBar.style.width = scrolled + "%";
+// Dark mode toggle
+const darkModeToggle=document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click',()=>{
+  document.body.classList.toggle("dark");
+  darkModeToggle.textContent=document.body.classList.contains("dark")?"☀️":"🌙";
+});
 
-      // Fade-in
-      fadeEls.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add("show");
-        }
-      });
-    });
+// Testimonials slider
+const slider=document.getElementById("testimonialSlider"), prev=document.getElementById("prevTestimonial"), next=document.getElementById("nextTestimonial");
+let tIndex=0;
+next.addEventListener('click',()=>{tIndex=(tIndex+1)%slider.children.length; slider.style.transform=`translateX(-${tIndex*100}%)`;});
+prev.addEventListener('click',()=>{tIndex=(tIndex-1+slider.children.length)%slider.children.length; slider.style.transform=`translateX(-${tIndex*100}%)`;});
 
-    // Back to top
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    // Dark mode
-    darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle("dark");
-      darkModeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-    });
-
-    // Trigger fade-in on load
-    window.dispatchEvent(new Event('scroll'));
-  </script>
+// Trigger fade-in on load
+window.dispatchEvent(new Event('scroll'));
+</script>
 </body>
 </html>
