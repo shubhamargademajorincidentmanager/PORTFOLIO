@@ -136,11 +136,11 @@ nav a.active {color:#3b82f6; font-weight:bold;}
 <section id="projects" class="py-16 px-6 max-w-4xl mx-auto fade-in" data-aos="fade-up">
   <h2 class="text-2xl font-bold mb-6 text-indigo-600">Projects</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <a href="https://github.com/shubhamargademajorincidentmanager/project1" class="bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform project-card">
+    <a href="https://github.com/shubhamargademajorincidentmanager/project1" data-tech="Power BI, SLA Metrics" class="project-card bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform">
       <h3 class="text-lg font-semibold mb-2">Incident Dashboard</h3>
       <p>Power BI dashboard showing SLA and incident trends with real-time metrics.</p>
     </a>
-    <a href="https://github.com/shubhamargademajorincidentmanager/project2" class="bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform project-card">
+    <a href="https://github.com/shubhamargademajorincidentmanager/project2" data-tech="Azure Functions, ServiceNow" class="project-card bg-white dark:bg-gray-700 p-5 rounded shadow hover:scale-105 transition transform">
       <h3 class="text-lg font-semibold mb-2">Azure Incident Automation</h3>
       <p>Automated alert system for P1/P2 incidents using Azure Functions and ServiceNow integration.</p>
     </a>
@@ -205,6 +205,7 @@ nav a.active {color:#3b82f6; font-weight:bold;}
     <button id="closeModal" class="absolute top-2 right-2 text-xl font-bold">×</button>
     <h3 class="text-xl font-bold mb-2" id="modalTitle"></h3>
     <p id="modalDesc" class="mb-4"></p>
+    <p id="modalTech" class="mb-4 text-sm text-gray-600 dark:text-gray-300"></p>
     <a id="modalLink" href="#" target="_blank" class="text-indigo-600 font-semibold">View on GitHub</a>
   </div>
 </div>
@@ -226,12 +227,7 @@ const typingText = document.getElementById("typing-text");
       j++;
       setTimeout(type,100);
     } else {
-      setTimeout(()=>{
-        txt="";
-        j=0;
-        i=(i+1)%phrases.length;
-        type();
-      },1500);
+      setTimeout(()=>{txt=""; j=0; i=(i+1)%phrases.length; type();},1500);
     }
   }
 })();
@@ -258,25 +254,30 @@ window.addEventListener("scroll",()=>{let winScroll=document.body.scrollTop||doc
 const modal = document.getElementById('projectModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalDesc = document.getElementById('modalDesc');
+const modalTech = document.getElementById('modalTech');
 const modalLink = document.getElementById('modalLink');
 const closeModal = document.getElementById('closeModal');
+
 document.querySelectorAll('.project-card').forEach(proj=>{
-  proj.addEventListener('click', e=>{
+  proj.addEventListener('click',e=>{
     e.preventDefault();
-    modalTitle.textContent = proj.querySelector('h3').textContent;
-    modalDesc.textContent = proj.querySelector('p').textContent;
-    modalLink.href = proj.href;
+    modalTitle.textContent=proj.querySelector('h3').textContent;
+    modalDesc.textContent=proj.querySelector('p').textContent;
+    modalTech.textContent=proj.getAttribute('data-tech')?("Tech: "+proj.getAttribute('data-tech')):"";
+    modalLink.href=proj.href;
     modal.classList.remove('hidden');
   });
 });
-closeModal.addEventListener('click',()=>{modal.classList.add('hidden');});
-modal.addEventListener('click',e=>{if(e.target==modal) modal.classList.add('hidden');});
 
-// Testimonial Slider
-let currentTestimonial=0;
+closeModal.addEventListener('click',()=>modal.classList.add('hidden'));
+modal.addEventListener('click',e=>{if(e.target==modal)modal.classList.add('hidden');});
+
+// Testimonials Slider
+let testimonialIndex=0;
 const slides=document.querySelectorAll("#testimonialSlider > div");
-document.getElementById("nextTestimonial").addEventListener("click",()=>{currentTestimonial=(currentTestimonial+1)%slides.length;document.getElementById("testimonialSlider").style.transform=`translateX(-${currentTestimonial*100}%)`;});
-document.getElementById("prevTestimonial").addEventListener("click",()=>{currentTestimonial=(currentTestimonial-1+slides.length)%slides.length;document.getElementById("testimonialSlider").style.transform=`translateX(-${currentTestimonial*100}%)`;});
+document.getElementById("nextTestimonial").addEventListener("click",()=>{testimonialIndex=(testimonialIndex+1)%slides.length; updateSlides();});
+document.getElementById("prevTestimonial").addEventListener("click",()=>{testimonialIndex=(testimonialIndex-1+slides.length)%slides.length; updateSlides();});
+function updateSlides(){document.getElementById("testimonialSlider").style.transform=`translateX(-${testimonialIndex*100}%)`;}
 </script>
 </body>
 </html>
